@@ -21,7 +21,7 @@ namespace SeleniumTests
             public void SetupTest()
             {
                 driver = new FirefoxDriver();
-                baseURL = "https://www.google.com/";
+                baseURL = "http://localhost:8080/";
                 verificationErrors = new StringBuilder();
             }
 
@@ -43,7 +43,7 @@ namespace SeleniumTests
             [Test]
             public void TheUntitledTestCaseTest()
             {
-                driver.Navigate().GoToUrl("http://localhost:8080/addressbook/");
+                driver.Navigate().GoToUrl(baseURL + "addressbook/");
                 driver.FindElement(By.Name("user")).Click();
                 driver.FindElement(By.Name("user")).Clear();
                 driver.FindElement(By.Name("user")).SendKeys("admin");
