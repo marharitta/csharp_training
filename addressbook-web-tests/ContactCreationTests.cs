@@ -7,10 +7,10 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
-namespace SeleniumTests
-    {
+namespace Addressbook_web_tests
+{
         [TestFixture]
-        public class UntitledTestCase
+        public class ContactCreationTests
         {
             private IWebDriver driver;
             private StringBuilder verificationErrors;
@@ -40,71 +40,93 @@ namespace SeleniumTests
                 Assert.AreEqual("", verificationErrors.ToString());
             }
 
-            [Test]
-            public void TheUntitledTestCaseTest()
-            {
-                driver.Navigate().GoToUrl(baseURL + "addressbook/");
-                driver.FindElement(By.Name("user")).Click();
-                driver.FindElement(By.Name("user")).Clear();
-                driver.FindElement(By.Name("user")).SendKeys("admin");
-                driver.FindElement(By.Name("pass")).Clear();
-                driver.FindElement(By.Name("pass")).SendKeys("secret");
-                driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-                driver.FindElement(By.LinkText("add new")).Click();
-                driver.FindElement(By.Name("firstname")).Click();
-                driver.FindElement(By.Name("firstname")).Clear();
-                driver.FindElement(By.Name("firstname")).SendKeys("Ivan");
-                driver.FindElement(By.Name("middlename")).Clear();
-                driver.FindElement(By.Name("middlename")).SendKeys("Ivanovich");
-                driver.FindElement(By.Name("lastname")).Clear();
-                driver.FindElement(By.Name("lastname")).SendKeys("Ivanov");
-                driver.FindElement(By.Name("nickname")).Clear();
-                driver.FindElement(By.Name("nickname")).SendKeys("IvanovI");
-                driver.FindElement(By.Name("photo")).Click();
-                driver.FindElement(By.Name("photo")).Clear();
-                driver.FindElement(By.Name("photo")).SendKeys("C:\\fakepath\\1-80.jpg");
-                driver.FindElement(By.Name("title")).Click();
-                driver.FindElement(By.Name("title")).Clear();
-                driver.FindElement(By.Name("title")).SendKeys("newTitle");
-                driver.FindElement(By.Name("company")).Clear();
-                driver.FindElement(By.Name("company")).SendKeys("IvanovCompany");
-                driver.FindElement(By.Name("address")).Clear();
-                driver.FindElement(By.Name("address")).SendKeys("newAdress");
-                driver.FindElement(By.Name("home")).Clear();
-                driver.FindElement(By.Name("home")).SendKeys("8017392847");
-                driver.FindElement(By.Name("mobile")).Clear();
-                driver.FindElement(By.Name("mobile")).SendKeys("+375292548759");
-                driver.FindElement(By.Name("work")).Clear();
-                driver.FindElement(By.Name("work")).SendKeys("+375336547892");
-                driver.FindElement(By.Name("email")).Clear();
-                driver.FindElement(By.Name("email")).SendKeys("newemail@gmail.com");
-                driver.FindElement(By.Name("email2")).Clear();
-                driver.FindElement(By.Name("email2")).SendKeys("myemail@mail.ru");
-                driver.FindElement(By.Name("bday")).Click();
-                new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("13");
-                driver.FindElement(By.Name("bmonth")).Click();
-                new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("May");
-                driver.FindElement(By.Name("byear")).Click();
-                driver.FindElement(By.Name("byear")).Clear();
-                driver.FindElement(By.Name("byear")).SendKeys("1982");
-                driver.FindElement(By.Name("theform")).Click();
-                driver.FindElement(By.Name("theform")).Click();
-                driver.FindElement(By.Name("aday")).Click();
-                new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("16");
-                driver.FindElement(By.Name("amonth")).Click();
-                new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("August");
-                driver.FindElement(By.Name("ayear")).Click();
-                driver.FindElement(By.Name("ayear")).Clear();
-                driver.FindElement(By.Name("ayear")).SendKeys("2010");
-                driver.FindElement(By.Name("theform")).Click();
-                driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
-                driver.FindElement(By.LinkText("Logout")).Click();
-                driver.FindElement(By.Name("user")).Clear();
-                driver.FindElement(By.Name("user")).SendKeys("admin");
-                driver.FindElement(By.Name("pass")).Clear();
-                driver.FindElement(By.Name("pass")).SendKeys("secret");
-            }
-            private bool IsElementPresent(By by)
+        [Test]
+        public void TheContactCreationTestCaseTest()
+        {
+            OpenHomePage();
+            LogIn(new AccountData("admin", "secret"));
+            AddNewContact();
+            ContactData contact = new ContactData();
+            contact.FirstName = "Petr"; 
+            contact.LastName = "Petrov";
+            FillContactForm(contact);
+            SubmiteContactCreation();
+            Logoff();
+        }
+
+        private void Logoff()
+        {
+            driver.FindElement(By.LinkText("Logout")).Click();
+        }
+
+        private void SubmiteContactCreation()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+        }
+
+        private void FillContactForm(ContactData contact)
+        {
+            driver.FindElement(By.Name("firstname")).Click();
+            driver.FindElement(By.Name("firstname")).Clear();
+            driver.FindElement(By.Name("firstname")).SendKeys(contact.FirstName);
+            driver.FindElement(By.Name("lastname")).Clear();
+            driver.FindElement(By.Name("lastname")).SendKeys(contact.LastName);
+ /*           driver.FindElement(By.Name("nickname")).Clear();
+            driver.FindElement(By.Name("nickname")).SendKeys("IvanovI");
+            driver.FindElement(By.Name("title")).Click();
+            driver.FindElement(By.Name("title")).Clear();
+            driver.FindElement(By.Name("title")).SendKeys("newTitle");
+            driver.FindElement(By.Name("company")).Clear();
+            driver.FindElement(By.Name("company")).SendKeys("IvanovCompany");
+            driver.FindElement(By.Name("address")).Clear();
+            driver.FindElement(By.Name("address")).SendKeys("newAdress");
+            driver.FindElement(By.Name("home")).Clear();
+            driver.FindElement(By.Name("home")).SendKeys("8017392847");
+            driver.FindElement(By.Name("mobile")).Clear();
+            driver.FindElement(By.Name("mobile")).SendKeys("+375292548759");
+            driver.FindElement(By.Name("work")).Clear();
+            driver.FindElement(By.Name("work")).SendKeys("+375336547892");
+            driver.FindElement(By.Name("email")).Clear();
+            driver.FindElement(By.Name("email")).SendKeys("newemail@gmail.com");
+            driver.FindElement(By.Name("email2")).Clear();
+            driver.FindElement(By.Name("email2")).SendKeys("myemail@mail.ru");
+            driver.FindElement(By.Name("bday")).Click();
+            new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText("13");
+            driver.FindElement(By.Name("bmonth")).Click();
+            new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText("May");
+            driver.FindElement(By.Name("byear")).Click();
+            driver.FindElement(By.Name("byear")).Clear();
+            driver.FindElement(By.Name("byear")).SendKeys("1982");
+            driver.FindElement(By.Name("aday")).Click();
+            new SelectElement(driver.FindElement(By.Name("aday"))).SelectByText("16");
+            driver.FindElement(By.Name("amonth")).Click();
+            new SelectElement(driver.FindElement(By.Name("amonth"))).SelectByText("August");
+            driver.FindElement(By.Name("ayear")).Click();
+            driver.FindElement(By.Name("ayear")).Clear();
+            driver.FindElement(By.Name("ayear")).SendKeys("2010");*/
+        }
+
+        private void AddNewContact()
+        {
+            driver.FindElement(By.LinkText("add new")).Click();
+        }
+
+        private void LogIn(AccountData account)
+        {
+            driver.FindElement(By.Name("user")).Click();
+            driver.FindElement(By.Name("user")).Clear();
+            driver.FindElement(By.Name("user")).SendKeys(account.Username);
+            driver.FindElement(By.Name("pass")).Clear();
+            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
+            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
+        }
+
+        private void OpenHomePage()
+        {
+            driver.Navigate().GoToUrl(baseURL + "addressbook/");
+        }
+
+        private bool IsElementPresent(By by)
             {
                 try
                 {
