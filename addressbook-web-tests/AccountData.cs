@@ -7,7 +7,7 @@ using OpenQA.Selenium;
 
 namespace Addressbook_web_tests
 {
-    class AccountData
+     public class AccountData  
     {
         private string username;
         private string password;

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace Addressbook_web_tests
 {
-    internal class ContactData
+    public class ContactData
     {
         private string firstName = "";
         private string middlename = "";
