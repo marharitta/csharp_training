@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium;
 
@@ -188,6 +184,15 @@ namespace Addressbook_web_tests
         protected void GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+        }
+        protected void SelectGroupToDelete()
+        {
+            driver.FindElement(By.LinkText("groups")).Click();
+            driver.FindElement(By.Name("selected[]")).Click();
+        }
+        protected void SubmitDeleteGroup()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
         }
     }
 }
