@@ -8,11 +8,11 @@ namespace Addressbook_web_tests
         [Test]
         public void DeleteGroupTestCaseTest()
         {
-            OpenHomePage();
-            LogIn(new AccountData("admin", "secret"));
-            SelectGroupToDelete();
-            SubmitDeleteGroup();
-            Logoff();
+            navigator.OpenHomePage();
+            loginHelper.LogIn(new AccountData("admin", "secret"));
+            groupHelper.SelectGroupToDelete();
+            groupHelper.SubmitDeleteGroup();
+            loginHelper.Logoff();
 
         }
 

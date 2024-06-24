@@ -8,8 +8,14 @@ namespace Addressbook_web_tests
     {
         protected IWebDriver driver;
         protected StringBuilder verificationErrors;
+
         protected string baseURL;
-        protected bool acceptNextAlert = true;
+
+
+
+        protected LoginHelper loginHelper;
+        protected NavigationHelper navigator;
+        protected GroupHelper groupHelper;
 
         [SetUp]
         public void SetupTest()
@@ -17,6 +23,10 @@ namespace Addressbook_web_tests
             driver = new FirefoxDriver();
             baseURL = "http://localhost:8080/";
             verificationErrors = new StringBuilder();
+            
+            loginHelper = new LoginHelper(driver);
+            navigator = new NavigationHelper(driver, baseURL);
+            groupHelper = new GroupHelper(driver);
         }
 
         [TearDown]
@@ -34,10 +44,7 @@ namespace Addressbook_web_tests
             Assert.AreEqual("", verificationErrors.ToString());
         }
 
-        protected void Logoff()
-        {
-            driver.FindElement(By.LinkText("Logout")).Click();
-        }
+
 
         protected void SubmiteContactCreation()
         {
@@ -91,108 +98,10 @@ namespace Addressbook_web_tests
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
-        protected void LogIn(AccountData account)
-        {
-            driver.FindElement(By.Name("user")).Click();
-            driver.FindElement(By.Name("user")).Clear();
-            driver.FindElement(By.Name("user")).SendKeys(account.Username);
-            driver.FindElement(By.Name("pass")).Clear();
-            driver.FindElement(By.Name("pass")).SendKeys(account.Password);
-            driver.FindElement(By.XPath("//input[@value='Login']")).Click();
-        }
 
-        protected void OpenHomePage()
-        {
-            driver.Navigate().GoToUrl(baseURL + "addressbook/");
-        }
 
-        protected bool IsElementPresent(By by)
-        {
-            try
-            {
-                driver.FindElement(by);
-                return true;
-            }
-            catch (NoSuchElementException)
-            {
-                return false;
-            }
-        }
+       
 
-        protected bool IsAlertPresent()
-        {
-            try
-            {
-                driver.SwitchTo().Alert();
-                return true;
-            }
-            catch (NoAlertPresentException)
-            {
-                return false;
-            }
-        }
-
-        protected string CloseAlertAndGetItsText()
-        {
-            try
-            {
-                IAlert alert = driver.SwitchTo().Alert();
-                string alertText = alert.Text;
-                if (acceptNextAlert)
-                {
-                    alert.Accept();
-                }
-                else
-                {
-                    alert.Dismiss();
-                }
-                return alertText;
-            }
-            finally
-            {
-                acceptNextAlert = true;
-            }
-        }
-
-        protected void ReturnToGroupPage()
-        {
-            driver.FindElement(By.LinkText("group page")).Click();
-        }
-
-        protected void SubmitGroupCreation()
-        {
-            driver.FindElement(By.Name("submit")).Click();
-        }
-
-        protected void FillGroupForm(GroupData group)
-        {
-            driver.FindElement(By.Name("group_name")).Click();
-            driver.FindElement(By.Name("group_name")).Clear();
-            driver.FindElement(By.Name("group_name")).SendKeys(group.Name);
-            driver.FindElement(By.Name("group_header")).Click();
-            driver.FindElement(By.Name("group_header")).Clear();
-            driver.FindElement(By.Name("group_header")).SendKeys(group.Header);
-            driver.FindElement(By.Name("group_footer")).Click();
-            driver.FindElement(By.Name("group_footer")).Clear();
-            driver.FindElement(By.Name("group_footer")).SendKeys(group.Footer);
-        }
-        protected void InitGroupCreation()
-        {
-            driver.FindElement(By.Name("new")).Click();
-        }
-
-        protected void GoToGroupsPage()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-        }
-        protected void SelectGroupToDelete()
-        {
-            driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("selected[]")).Click();
-        }
-        protected void SubmitDeleteGroup()
-        {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
-        }
+        
     }
 }

@@ -1,0 +1,65 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="Addressbook_web_tests.TestBase">
+    <Position X="12.5" Y="0.5" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAQCIAAkAAAAAAAAAATAAAAAAAAAABAAAAAAACA=</HashCode>
+      <FileName>TestBase.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="loginHelper" />
+      <Field Name="navigator" />
+      <Field Name="groupHelper" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Addressbook_web_tests.ContactCreationTests">
+    <Position X="9" Y="3.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>ContactCreationTests.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Addressbook_web_tests.DeleteGroupTestCase" Collapsed="true">
+    <Position X="16.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>DeleteGroup.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Addressbook_web_tests.GroupCreationTests" Collapsed="true">
+    <Position X="13.5" Y="4.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GroupCreationTests .cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Addressbook_web_tests.GroupHelper" Collapsed="true">
+    <Position X="17.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIABABAABAAABCAAAQBMAAAAAAAAAAAAAA=</HashCode>
+      <FileName>GroupHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Addressbook_web_tests.LoginHelper" Collapsed="true">
+    <Position X="17.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAA=</HashCode>
+      <FileName>LoginHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Addressbook_web_tests.NavigationHelper" Collapsed="true">
+    <Position X="17.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAACAAAAIAAAAAAAAAAAAACA=</HashCode>
+      <FileName>NavigationHelper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Addressbook_web_tests.HelperBase" Collapsed="true">
+    <Position X="20.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>HelperBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
