@@ -7,15 +7,15 @@
             [Test]
             public void TheContactCreationTestCaseTest()
             {
-                navigator.OpenHomePage();
-                loginHelper.LogIn(new AccountData("admin", "secret"));
-                AddNewContact();
+                app.Navigator.OpenHomePage();
+                app.Auth.LogIn(new AccountData("admin", "secret"));
+                app.Contact.AddNewContact();
                 ContactData contact = new ContactData();
                 contact.FirstName = "Petr"; 
                 contact.LastName = "Petrov";
-                FillContactForm(contact);
-                SubmiteContactCreation();
-                loginHelper.Logoff();
+                app.Contact.FillContactForm(contact);
+                app.Contact.SubmiteContactCreation();
+                app.Auth.Logoff();
            }
         }
     }

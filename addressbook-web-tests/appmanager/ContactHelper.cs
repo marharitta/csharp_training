@@ -1,57 +1,25 @@
-﻿using System.Text;
-using OpenQA.Selenium.Firefox;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using OpenQA.Selenium;
 
 namespace Addressbook_web_tests
 {
-    public  class TestBase
+    public class ContactHelper : HelperBase
     {
-        protected IWebDriver driver;
-        protected StringBuilder verificationErrors;
+        private IWebDriver driver;
 
-        protected string baseURL;
-
-
-
-        protected LoginHelper loginHelper;
-        protected NavigationHelper navigator;
-        protected GroupHelper groupHelper;
-
-        [SetUp]
-        public void SetupTest()
+        public ContactHelper(IWebDriver driver) : base(driver)
         {
-            driver = new FirefoxDriver();
-            baseURL = "http://localhost:8080/";
-            verificationErrors = new StringBuilder();
-            
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
         }
-
-        [TearDown]
-        public void TeardownTest()
-        {
-            try
-            {
-                driver.Quit();
-                driver.Dispose();
-            }
-            catch (Exception)
-            {
-                // Ignore errors if unable to close the browser
-            }
-            Assert.AreEqual("", verificationErrors.ToString());
-        }
-
-
-
-        protected void SubmiteContactCreation()
+        public void SubmiteContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
         }
 
-        protected void FillContactForm(ContactData contact)
+        public void FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -92,16 +60,11 @@ namespace Addressbook_web_tests
                        driver.FindElement(By.Name("ayear")).Clear();
                        driver.FindElement(By.Name("ayear")).SendKeys("2010");*/
         }
-
-        protected void AddNewContact()
+        public void AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
         }
 
 
-
-       
-
-        
     }
 }
