@@ -12,6 +12,12 @@ namespace Addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
+        public void Create(ContactData contact)
+        {
+            AddNewContact();
+            FillContactForm(contact);
+            SubmiteContactCreation();
+        }
         public void SubmiteContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
