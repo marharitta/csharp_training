@@ -8,12 +8,8 @@ namespace Addressbook_web_tests
         [Test]
         public void DeleteGroupTestCaseTest()
         {
-            app.Navigator.OpenHomePage();
-            app.Auth.LogIn(new AccountData("admin", "secret"));
-            app.Groups.SelectGroupToDelete();
-            app.Groups.SubmitDeleteGroup();
+            app.Groups.Remove(1);
             app.Auth.Logoff();
-
         }
 
     }

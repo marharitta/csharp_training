@@ -26,10 +26,16 @@ namespace Addressbook_web_tests
             baseURL = "http://localhost:8080/";
             verificationErrors = new StringBuilder();
 
-            loginHelper = new LoginHelper(driver);
-            navigator = new NavigationHelper(driver, baseURL);
-            groupHelper = new GroupHelper(driver);
-            contactHelper = new ContactHelper(driver);
+            loginHelper = new LoginHelper(this);
+            navigator = new NavigationHelper(this, baseURL);
+            groupHelper = new GroupHelper(this);
+            contactHelper = new ContactHelper(this);
+        }
+       
+        public IWebDriver? Driver
+        {
+            get { return driver; }
+
         }
 
         public void Stop()
@@ -62,5 +68,6 @@ namespace Addressbook_web_tests
             get { return contactHelper;  }
         }
 
+       
     }
 }

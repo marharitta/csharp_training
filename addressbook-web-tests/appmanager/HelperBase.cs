@@ -4,12 +4,15 @@ namespace Addressbook_web_tests
 {
     public class HelperBase
     {
+        protected ApplicationManager manager;
         protected IWebDriver driver;
         protected bool acceptNextAlert = true;
 
-        public HelperBase(IWebDriver driver)
+
+        public HelperBase(ApplicationManager manager)
         {
-            this.driver = driver;
+            this.manager = manager;
+            this.driver = manager.Driver;
         }
         public bool IsElementPresent(By by)
         {
