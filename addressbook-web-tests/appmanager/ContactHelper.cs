@@ -9,8 +9,6 @@ namespace Addressbook_web_tests
 {
     public class ContactHelper : HelperBase
     {
-        private IWebDriver driver;
-
         public ContactHelper(IWebDriver driver) : base(driver)
         {
         }
