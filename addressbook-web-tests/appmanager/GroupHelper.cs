@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Addressbook_web_tests
 {
@@ -23,11 +24,22 @@ namespace Addressbook_web_tests
             ReturnToGroupPage();
             return this;
         }
+        public GroupHelper Modified(int v, GroupData newData)
+        {
+            manager.Navigator.GoToGroupsPage();
+            SelectGroup(v);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+            return this;
+        }
+
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
 
-            SelectGroupToDelete();
+            SelectGroup(v);
             SubmitDeleteGroup();
             return this;
         }
@@ -62,10 +74,10 @@ namespace Addressbook_web_tests
             return this;
         }
 
-        public GroupHelper SelectGroupToDelete()
+        public GroupHelper SelectGroup(int p)
         {
             driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.Name("selected[]")).Click();
+            driver.FindElement(By.XPath($"/html/body/div/div[4]/form/span[{p}]/input")).Click(); 
             return this;
         }
         public GroupHelper SubmitDeleteGroup()
@@ -74,6 +86,16 @@ namespace Addressbook_web_tests
             return this;
         }
 
+        public GroupHelper SubmitGroupModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
 
+        public GroupHelper InitGroupModification()
+        {
+            driver.FindElement(By.Name("edit")).Click();
+            return this;
+        }
     }
 }

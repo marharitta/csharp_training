@@ -12,13 +12,15 @@ namespace Addressbook_web_tests
         {
             this.baseURL = baseURL;
         }
-        public void GoToGroupsPage()
+        public NavigationHelper GoToGroupsPage()
         {
             driver.FindElement(By.LinkText("groups")).Click();
+            return this;
         }
-        public void OpenHomePage()
+        public NavigationHelper OpenHomePage()
         {
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
+            return this;
         }
     }
 }

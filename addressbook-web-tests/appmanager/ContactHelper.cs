@@ -12,18 +12,39 @@ namespace Addressbook_web_tests
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
         }
-        public void Create(ContactData contact)
+        public ContactHelper Create(ContactData contact)
         {
             AddNewContact();
             FillContactForm(contact);
             SubmiteContactCreation();
+            return this;
         }
-        public void SubmiteContactCreation()
+  /*      public GroupHelper Modified(int v, GroupData newData)
         {
-            driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+            manager.Navigator.GoToGroupsPage();
+            SelectContact(v);
+            InitGroupModification();
+            FillGroupForm(newData);
+            SubmitGroupModification();
+            ReturnToGroupPage();
+            return this;
+        }
+  */
+        public ContactHelper Remove(string v)
+        {
+            SelectContact(v);
+            SubmitDeleteContact();
+
+            return this;
         }
 
-        public void FillContactForm(ContactData contact)
+        public ContactHelper SubmiteContactCreation()
+        {
+            driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
+            return this;
+        }
+
+        public ContactHelper FillContactForm(ContactData contact)
         {
             driver.FindElement(By.Name("firstname")).Click();
             driver.FindElement(By.Name("firstname")).Clear();
@@ -63,12 +84,24 @@ namespace Addressbook_web_tests
                        driver.FindElement(By.Name("ayear")).Click();
                        driver.FindElement(By.Name("ayear")).Clear();
                        driver.FindElement(By.Name("ayear")).SendKeys("2010");*/
+            return this;
         }
-        public void AddNewContact()
+        public ContactHelper AddNewContact()
         {
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+        public ContactHelper SubmitDeleteContact()
+        {
+            driver.FindElement(By.XPath($"/html/body/div/div[4]/form[2]/div[2]/input")).Click();
+            return this;
         }
 
+        public ContactHelper SelectContact(string v)
+        {
+            driver.FindElement(By.Id(v)).Click();
+            return this;
+        }
 
     }
 }

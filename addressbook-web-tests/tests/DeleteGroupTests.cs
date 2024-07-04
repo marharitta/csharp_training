@@ -6,9 +6,9 @@ namespace Addressbook_web_tests
     {
 
         [Test]
-        public void DeleteGroupTestCaseTest()
+        public void DeleteGroupTest()
         {
-            app.Groups.Remove(1);
+            app.Groups.Remove(2); 
             app.Auth.Logoff();
         }
 
