@@ -19,17 +19,17 @@ namespace Addressbook_web_tests
             SubmiteContactCreation();
             return this;
         }
-  /*      public GroupHelper Modified(int v, GroupData newData)
+        public ContactHelper Modified(int v, ContactData newData)
         {
-            manager.Navigator.GoToGroupsPage();
-            SelectContact(v);
-            InitGroupModification();
-            FillGroupForm(newData);
-            SubmitGroupModification();
-            ReturnToGroupPage();
+           
+            InitContactModification(v);
+            FillContactForm(newData);
+            SubmitContactModification();
+            ReturnToHomePage();
             return this;
         }
-  */
+
+
         public ContactHelper Remove(string v)
         {
             SelectContact(v);
@@ -38,6 +38,21 @@ namespace Addressbook_web_tests
             return this;
         }
 
+        public ContactHelper ReturnToHomePage()
+        {
+            driver.FindElement(By.LinkText("home")).Click();
+            return this;
+        }
+        public ContactHelper SubmitContactModification()
+        {
+            driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+       public ContactHelper InitContactModification(int v)
+        {
+            driver.FindElement(By.XPath($"(//img[@alt='Edit'])[{v}]")).Click();
+            return this;
+        }
         public ContactHelper SubmiteContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
