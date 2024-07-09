@@ -8,10 +8,13 @@ namespace Addressbook_web_tests
         public void TheContactModificationTest()
         {
             ContactData contact = new ContactData();
-            contact.FirstName = "Ivan";
-            contact.LastName = "Ivanov";
+            contact.FirstName = null;
+            contact.MiddleName = null;
+            contact.LastName = null;
+            contact.Email = null;
+            contact.Telwork = "6543219";
 
-            app.Contact.Modified(1, contact);
+            app.Contact.Modify(1, contact);
 
             app.Auth.Logoff();
         }

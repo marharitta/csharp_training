@@ -12,7 +12,7 @@
         private string telephoneHome = "";
         private string mobile  = "";
         private string telwork = "";
-        private string Fax   = "";
+        private string fax   = "";
         private string email = "";
         private string email2 = "";
         private string email3 = "";
@@ -20,9 +20,6 @@
         private string bday = "";
         private string bmonth = "";
         private string byear = "";
-        private string aday = "";
-        private string amonth = "";
-        private string ayear = "";
         private string group = "";
 
         public string FirstName
@@ -48,6 +45,170 @@
                 lastname = value;
             }
         }
-
+        public string MiddleName
+        {
+            get
+            {
+                return middlename;
+            }
+            set
+            {
+                middlename = value;
+            }
+        }
+        public string Nickname
+        {
+            get
+            {
+                return nickname;
+            }
+            set
+            {
+                nickname = value;
+            }
+        }
+        public string Title
+        {
+            get
+            {
+                return title;
+            }
+            set
+            {
+                title = value;
+            }
+        }
+        public string Company
+        {
+            get
+            {
+                return company;
+            }
+            set
+            {
+                company = value;
+            }
+        }
+        public string Address
+        {
+            get
+            {
+                return address;
+            }
+            set
+            {
+                address = value;
+            }
+        }
+        public string TelephoneHome
+        {
+            get
+            {
+                return telephoneHome;
+            }
+            set
+            {
+                telephoneHome = value;
+            }
+        }
+        public string Mobile
+        {
+            get
+            {
+                return mobile;
+            }
+            set
+            {
+                mobile = value;
+            }
+        }
+        public string Telwork
+        {
+            get
+            {
+                return telwork;
+            }
+            set
+            {
+                telwork = value;
+            }
+        }
+        public string Fax
+        {
+            get
+            {
+                return fax;
+            }
+            set
+            {
+                fax = value;
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return email;
+            }
+            set
+            {
+                email = value;
+            }
+        }
+        public string HomePage
+        {
+            get
+            {
+                return homePage;
+            }
+            set
+            {
+                homePage = value;
+            }
+        }
+        public string Bday
+        {
+            get
+            {
+                return bday;
+            }
+            set
+            {
+                bday = value;
+            }
+        }
+        public string Bmonth
+        {
+            get
+            {
+                return bmonth;
+            }
+            set
+            {
+                bmonth = value;
+            }
+        }
+        public string Byear
+        {
+            get
+            {
+                return byear;
+            }
+            set
+            {
+                byear = value;
+            }
+        }
+        public string Group
+        {
+            get
+            {
+                return group;
+            }
+            set
+            {
+                group = value;
+            }
+        }
     }
 }

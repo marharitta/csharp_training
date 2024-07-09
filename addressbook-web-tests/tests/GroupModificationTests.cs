@@ -13,10 +13,10 @@ namespace Addressbook_web_tests
         public void GroupModificationTest()
         {
             GroupData newData = new GroupData("zzz");
-            newData.Footer = "ttt";
-            newData.Header = "fhbs";
+            newData.Footer = null;
+            newData.Header = null;
 
-            app.Groups.Modified(1, newData); 
+            app.Groups.Modify(1, newData); 
         }
     }
 }
