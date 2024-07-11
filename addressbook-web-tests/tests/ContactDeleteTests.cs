@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Addressbook_web_tests.tests
+namespace Addressbook_web_tests
 {
     [TestFixture]
     public class ContactDeleteTests: TestBase
