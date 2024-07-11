@@ -15,8 +15,6 @@ namespace Addressbook_web_tests
             contact.Telwork = "6543219";
 
             app.Contact.Modify(1, contact);
-
-            app.Auth.Logoff();
         }
     }
  }

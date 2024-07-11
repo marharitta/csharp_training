@@ -15,7 +15,6 @@ namespace Addressbook_web_tests
 
             app.Contact.Remove("1");
 
-            app.Auth.Logoff();
         }
     }
 }
