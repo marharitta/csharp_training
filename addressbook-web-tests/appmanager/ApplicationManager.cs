@@ -20,7 +20,9 @@ namespace Addressbook_web_tests
 
         protected string baseURL;
 
-        public ApplicationManager() 
+        private static ThreadLocal<ApplicationManager> app = new ThreadLocal<ApplicationManager>();
+
+        private ApplicationManager() 
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost:8080/";
@@ -31,14 +33,8 @@ namespace Addressbook_web_tests
             groupHelper = new GroupHelper(this);
             contactHelper = new ContactHelper(this);
         }
-       
-        public IWebDriver? Driver
-        {
-            get { return driver; }
 
-        }
-
-        public void Stop()
+         ~ApplicationManager()
         {
             try
             {
@@ -50,6 +46,21 @@ namespace Addressbook_web_tests
                 // Ignore errors if unable to close the browser
             }
         }
+        public static ApplicationManager GetInstance()
+        {
+            if (! app.IsValueCreated)
+            {
+                app.Value = new ApplicationManager();
+            }
+            return app.Value;
+        }
+       
+        public IWebDriver? Driver
+        {
+            get { return driver; }
+
+        }
+
         public LoginHelper Auth
         { 
             get

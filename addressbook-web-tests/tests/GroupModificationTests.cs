@@ -10,7 +10,7 @@ namespace Addressbook_web_tests
     public class GroupModificationTests: TestBase
     {
         [Test]
-        public void GroupModificationTest()
+        public void TheGroupModificationTest()
         {
             GroupData newData = new GroupData("zzz");
             newData.Footer = null;

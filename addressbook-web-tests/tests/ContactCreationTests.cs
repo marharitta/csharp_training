@@ -12,7 +12,6 @@
                 contact.LastName = "Petrov";
                 app.Contact.Create(contact);
 
-                app.Auth.Logoff();
            }
         }
     }

@@ -14,7 +14,6 @@ namespace Addressbook_web_tests
             group.Header = "ddd";
             app.Groups.Create(group);
 
-            app.Auth.Logoff();
         }
         [Test]
         public void EmptyGroupCreationTest()
@@ -24,7 +23,6 @@ namespace Addressbook_web_tests
             group.Header = "";
             app.Groups.Create(group);
 
-            app.Auth.Logoff();
         }
     }
 
