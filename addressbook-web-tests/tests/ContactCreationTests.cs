@@ -1,8 +1,8 @@
 ﻿namespace Addressbook_web_tests
 {
         [TestFixture]
-        public class ContactCreationTests : TestBase
-        {
+        public class ContactCreationTests : AuthTestBase
+    {
            
             [Test]
             public void TheContactCreationTestCaseTest()

@@ -6,14 +6,12 @@ using System.Threading.Tasks;
 
 namespace Addressbook_web_tests
 {
-    [TestFixture]
-    public class ContactDeleteTests: AuthTestBase
+    public class AuthTestBase: TestBase
     {
-        [Test]
-        public void DeleteContactTest()
+        [SetUp]
+        public void SetupLogin()
         {
-
-            app.Contact.Remove("1");
+            app.Auth.LogIn(new AccountData("admin", "secret"));
 
         }
     }

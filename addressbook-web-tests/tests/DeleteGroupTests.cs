@@ -2,7 +2,7 @@
 namespace Addressbook_web_tests
 {
     [TestFixture]
-    public class DeleteGroupTestCase : TestBase
+    public class DeleteGroupTestCase : AuthTestBase
     {
 
         [Test]

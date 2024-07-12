@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Addressbook_web_tests
 {
     [TestFixture]
-    public class GroupModificationTests: TestBase
+    public class GroupModificationTests: AuthTestBase
     {
         [Test]
         public void TheGroupModificationTest()
