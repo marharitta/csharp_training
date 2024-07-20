@@ -84,13 +84,13 @@ namespace Addressbook_web_tests
         }
         public ContactHelper SubmitDeleteContact()
         {
-            driver.FindElement(By.XPath($"/html/body/div/div[4]/form[2]/div[2]/input")).Click();
+            driver.FindElement(By.XPath($"//*[@id=\"content\"]/form[2]/div[2]/input")).Click();
             return this;
         }
 
         public ContactHelper SelectContact(string v)
         {
-            driver.FindElement(By.Id(v)).Click();
+            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{v}]/td/input")).Click();
             return this;
         }
 
