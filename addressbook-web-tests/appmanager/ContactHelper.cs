@@ -14,6 +14,7 @@ namespace Addressbook_web_tests
         }
         public ContactHelper Create(ContactData contact)
         {
+            ReturnToHomePage();
             AddNewContact();
             FillContactForm(contact);
             SubmiteContactCreation();
@@ -21,17 +22,17 @@ namespace Addressbook_web_tests
         }
         public ContactHelper Modify(int v, ContactData newData)
         {
-           
+            ReturnToHomePage();
             InitContactModification(v);
             FillContactForm(newData);
             SubmitContactModification();
-            ReturnToHomePage();
             return this;
         }
 
 
         public ContactHelper Remove(string v)
         {
+            ReturnToHomePage();
             SelectContact(v);
             SubmitDeleteContact();
 

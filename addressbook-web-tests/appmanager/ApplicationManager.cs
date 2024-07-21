@@ -25,6 +25,7 @@ namespace Addressbook_web_tests
         private ApplicationManager() 
         {
             driver = new FirefoxDriver();
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(2);
             baseURL = "http://localhost:8080/";
             verificationErrors = new StringBuilder();
 
@@ -48,12 +49,13 @@ namespace Addressbook_web_tests
         }
         public static ApplicationManager GetInstance()
         {
-            if (! app.IsValueCreated)
+            if (!app.IsValueCreated)
             {
-               ApplicationManager newInstance = new ApplicationManager();
-               newInstance.Navigator.OpenHomePage();
+                ApplicationManager newInstance = new ApplicationManager();
+                newInstance.Navigator.OpenHomePage();
                 app.Value = newInstance;
             }
+
             return app.Value;
         }
        
