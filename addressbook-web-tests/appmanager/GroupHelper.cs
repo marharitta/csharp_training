@@ -76,7 +76,7 @@ namespace Addressbook_web_tests
 
             if (IsElementPresent(By.XPath($"//*[@id='content']/form/span[1]")) == true)
             {
-                driver.FindElement(By.XPath($"//*[@id='content']/form/span[{p}]/input")).Click();
+                driver.FindElement(By.XPath($"//*[@id='content']/form/span[{p+1}]/input")).Click();
             }
             else
             {

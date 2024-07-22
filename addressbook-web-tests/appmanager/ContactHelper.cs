@@ -30,7 +30,7 @@ namespace Addressbook_web_tests
         }
 
 
-        public ContactHelper Remove(string v)
+        public ContactHelper Remove(int v)
         {
             ReturnToHomePage();
             SelectContact(v);
@@ -102,13 +102,13 @@ namespace Addressbook_web_tests
             return this;
         }
 
-        public ContactHelper SelectContact(string v)
+        public ContactHelper SelectContact(int v)
         {
             
             
             if (IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
             {
-                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{v}]/td/input")).Click();
+                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{v+2}]/td/input")).Click();
             }
             else
             {
@@ -122,5 +122,19 @@ namespace Addressbook_web_tests
             return this;
         }
 
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.OpenHomePage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//table[@id='maintable']/tbody/tr[@name='entry']"));
+            foreach (IWebElement element in elements)
+            {
+                contacts.Add(new ContactData()
+                {
+                    FirstName = element.FindElement(By.XPath("td[2]")).Text
+                });
+            }
+            return contacts;
+        }
     }
 }

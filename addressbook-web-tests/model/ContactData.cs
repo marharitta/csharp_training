@@ -1,6 +1,8 @@
-﻿namespace Addressbook_web_tests
+﻿using System.Xml.Linq;
+
+namespace Addressbook_web_tests
 {
-    public class ContactData
+    public class ContactData: IEquatable<ContactData>
     {
         private string firstName = "";
         private string middlename = "";
@@ -22,6 +24,25 @@
         private string byear = "";
         private string group = "";
 
+        public bool Equals(ContactData other)
+        {
+            if (Object.ReferenceEquals(this, null))
+            {
+                return false;
+            }
+
+            if (Object.ReferenceEquals(this, other))
+            {
+                return true;
+            }
+            return FirstName == other.FirstName && LastName == other.LastName;
+        }
+
+        public int GetHashCode()
+        {
+            return $"{FirstName}{LastName}".GetHashCode();
+
+        }
         public string FirstName
         {
             get
