@@ -51,7 +51,20 @@ namespace Addressbook_web_tests
         }
        public ContactHelper InitContactModification(int v)
         {
-            driver.FindElement(By.XPath($"(//img[@alt='Edit'])[{v}]")).Click();
+            if (IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
+            {
+                driver.FindElement(By.XPath($"(//img[@alt='Edit'])[{v}]")).Click();
+            }
+            else
+            {
+                ContactData contact = new ContactData();
+                contact.FirstName = "Petr";
+                contact.LastName = "Petrov";
+                Create(contact);
+
+                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[1]/td/input")).Click();
+            }
+            
             return this;
         }
         public ContactHelper SubmiteContactCreation()
@@ -91,7 +104,21 @@ namespace Addressbook_web_tests
 
         public ContactHelper SelectContact(string v)
         {
-            driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{v}]/td/input")).Click();
+            
+            
+            if (IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
+            {
+                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{v}]/td/input")).Click();
+            }
+            else
+            {
+                ContactData contact = new ContactData();
+                contact.FirstName = "Petr";
+                contact.LastName = "Petrov";
+                Create(contact);
+
+                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[1]/td/input")).Click();
+            }
             return this;
         }
 

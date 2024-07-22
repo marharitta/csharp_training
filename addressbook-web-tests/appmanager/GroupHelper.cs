@@ -73,7 +73,21 @@ namespace Addressbook_web_tests
         public GroupHelper SelectGroup(int p)
         {
             driver.FindElement(By.LinkText("groups")).Click();
-            driver.FindElement(By.XPath($"/html/body/div/div[4]/form/span[{p}]/input")).Click(); 
+
+            if (IsElementPresent(By.XPath($"//*[@id='content']/form/span[1]")) == true)
+            {
+                driver.FindElement(By.XPath($"//*[@id='content']/form/span[{p}]/input")).Click();
+            }
+            else
+            {
+                GroupData group = new GroupData("aaa");
+                group.Footer = "fff";
+                group.Header = "ddd";
+
+                Create(group);
+
+                driver.FindElement(By.XPath($"//*[@id='content']/form/span[1]/input")).Click();
+            }
             return this;
         }
         public GroupHelper SubmitDeleteGroup()
