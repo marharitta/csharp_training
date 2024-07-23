@@ -85,6 +85,7 @@ namespace Addressbook_web_tests
                 group.Header = "ddd";
 
                 Create(group);
+                manager.Navigator.GoToGroupsPage();
 
                 driver.FindElement(By.XPath($"//*[@id='content']/form/span[1]/input")).Click();
             }

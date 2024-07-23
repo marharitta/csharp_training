@@ -1,4 +1,6 @@
 ﻿
+using System.Security.Cryptography;
+
 namespace Addressbook_web_tests
 {
     [TestFixture]
@@ -8,13 +10,22 @@ namespace Addressbook_web_tests
         public void TheContactModificationTest()
         {
             ContactData contact = new ContactData();
-            contact.FirstName = null;
+            contact.FirstName = "MyNewName";
             contact.MiddleName = null;
-            contact.LastName = null;
+            contact.LastName = "MyNewLastName";
             contact.Email = null;
-            contact.Telwork = "6543219";
+            contact.Telwork = null;
+
+            List<ContactData> oldContacts = app.Contact.GetContactList();
 
             app.Contact.Modify(1, contact);
+
+            List<ContactData> newContacts = app.Contact.GetContactList();
+            oldContacts[0].FirstName = contact.FirstName;
+            oldContacts[0].LastName = contact.LastName;
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
  }

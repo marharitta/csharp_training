@@ -116,8 +116,9 @@ namespace Addressbook_web_tests
                 contact.FirstName = "Petr";
                 contact.LastName = "Petrov";
                 Create(contact);
+                ReturnToHomePage();
 
-                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[1]/td/input")).Click();
+                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[2]/td[1]/input")).Click();
             }
             return this;
         }
@@ -131,7 +132,7 @@ namespace Addressbook_web_tests
             {
                 contacts.Add(new ContactData()
                 {
-                    FirstName = element.FindElement(By.XPath("td[2]")).Text
+                    LastName = element.FindElement(By.XPath("td[2]")).Text,FirstName = element.FindElement(By.XPath("td[3]")).Text
                 });
             }
             return contacts;

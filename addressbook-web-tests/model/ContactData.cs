@@ -2,7 +2,7 @@
 
 namespace Addressbook_web_tests
 {
-    public class ContactData: IEquatable<ContactData>
+    public class ContactData: IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstName = "";
         private string middlename = "";
@@ -43,6 +43,24 @@ namespace Addressbook_web_tests
             return $"{FirstName}{LastName}".GetHashCode();
 
         }
+
+        public override string ToString()
+        {
+            return "name=" + FirstName;
+        }
+
+        public int CompareTo(ContactData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            else
+            {
+                return $"{FirstName}{LastName}".CompareTo($"{other.firstName}{other.LastName}"); ;               
+            }
+        }
+
         public string FirstName
         {
             get
