@@ -1,4 +1,6 @@
 ﻿
+using OpenQA.Selenium;
+
 namespace Addressbook_web_tests
 {
     [TestFixture]
@@ -10,7 +12,20 @@ namespace Addressbook_web_tests
         {
             List<GroupData> oldGroups = app.Groups.GetGroupList();
 
-            app.Groups.Remove(0);
+            if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == true)
+            {
+                app.Groups.Remove(0);
+            }
+            else
+            {
+                GroupData group = new GroupData("aaa");
+                group.Footer = "fff";
+                group.Header = "ddd";
+
+                app.Groups.Create(group);
+
+                app.Groups.Remove(0);
+            }
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
 

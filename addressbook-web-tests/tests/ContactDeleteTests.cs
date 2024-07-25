@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OpenQA.Selenium;
 
 namespace Addressbook_web_tests
 {
@@ -14,7 +15,20 @@ namespace Addressbook_web_tests
         {
             List<ContactData> oldContact = app.Contact.GetContactList();
 
-            app.Contact.Remove(0);
+            if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
+            {
+                app.Contact.Remove(0);
+            }
+            else
+            {
+                ContactData contact = new ContactData();
+                contact.FirstName = "Petr";
+                contact.LastName = "Petrov";
+
+                app.Contact.Create(contact);
+
+                app.Contact.Remove(0);
+            }
 
             List<ContactData> newContact = app.Contact.GetContactList();
 

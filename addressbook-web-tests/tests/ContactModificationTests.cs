@@ -1,5 +1,6 @@
 ﻿
 using System.Security.Cryptography;
+using OpenQA.Selenium;
 
 namespace Addressbook_web_tests
 {
@@ -9,20 +10,34 @@ namespace Addressbook_web_tests
         [Test]
         public void TheContactModificationTest()
         {
-            ContactData contact = new ContactData();
-            contact.FirstName = "MyNewName";
-            contact.MiddleName = null;
-            contact.LastName = "MyNewLastName";
-            contact.Email = null;
-            contact.Telwork = null;
+            ContactData newContact = new ContactData();
+            newContact.FirstName = "MyNewName";
+            newContact.MiddleName = null;
+            newContact.LastName = "MyNewLastName";
+            newContact.Email = null;
+            newContact.Telwork = null;
 
             List<ContactData> oldContacts = app.Contact.GetContactList();
 
-            app.Contact.Modify(1, contact);
 
+            if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
+            {
+                app.Contact.Modify(1, newContact);
+            }
+            else
+            {
+                ContactData contact = new ContactData();
+                contact.FirstName = "Petr";
+                contact.LastName = "Petrov";
+
+                app.Contact.Create(contact);
+
+                app.Contact.Modify(1, newContact);
+            } 
+                
             List<ContactData> newContacts = app.Contact.GetContactList();
-            oldContacts[0].FirstName = contact.FirstName;
-            oldContacts[0].LastName = contact.LastName;
+            oldContacts[0].FirstName = newContact.FirstName;
+            oldContacts[0].LastName = newContact.LastName;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);
