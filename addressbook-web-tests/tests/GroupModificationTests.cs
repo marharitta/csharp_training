@@ -17,12 +17,12 @@ namespace Addressbook_web_tests
             GroupData newData = new GroupData("zzz");
             newData.Footer = null;
             newData.Header = null;
+            int modifyIndex = 0;
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
-
             if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == true)
             {
-                app.Groups.Modify(0, newData);
+                app.Groups.Modify(modifyIndex, newData);
             }
             else
             {
@@ -32,11 +32,11 @@ namespace Addressbook_web_tests
 
                 app.Groups.Create(group);
 
-                app.Groups.Modify(1, newData);
+                app.Groups.Modify(0, newData);
             }
 
             List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups[0].Name = newData.Name;
+            oldGroups[modifyIndex].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);

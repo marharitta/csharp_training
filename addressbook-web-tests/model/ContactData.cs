@@ -57,7 +57,13 @@ namespace Addressbook_web_tests
             }
             else
             {
-                return $"{FirstName}{LastName}".CompareTo($"{other.firstName}{other.LastName}"); ;               
+                int lastNameCompareResult = LastName.CompareTo(other.LastName);
+                if (lastNameCompareResult != 0)
+                {
+                    return lastNameCompareResult;
+                }
+
+                return FirstName.CompareTo(other.FirstName);
             }
         }
 

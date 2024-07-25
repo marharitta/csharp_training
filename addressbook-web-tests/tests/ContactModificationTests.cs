@@ -22,7 +22,7 @@ namespace Addressbook_web_tests
 
             if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
             {
-                app.Contact.Modify(1, newContact);
+                app.Contact.Modify(0, newContact);
             }
             else
             {
@@ -32,7 +32,7 @@ namespace Addressbook_web_tests
 
                 app.Contact.Create(contact);
 
-                app.Contact.Modify(1, newContact);
+                app.Contact.Modify(0, newContact);
             } 
                 
             List<ContactData> newContacts = app.Contact.GetContactList();

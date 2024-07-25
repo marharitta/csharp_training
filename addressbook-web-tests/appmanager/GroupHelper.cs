@@ -73,9 +73,15 @@ namespace Addressbook_web_tests
         public GroupHelper SelectGroup(int p)
         {
   //          driver.FindElement(By.LinkText("groups")).Click();
+            if(p == 0)
+            {
+                driver.FindElement(By.XPath($"//div[@id='content']/form/span/input")).Click();
+            }
+            else
+            {
+                driver.FindElement(By.XPath($"//div[@id='content']/form/span[{p+1}]/input")).Click();
+            }
 
-            driver.FindElement(By.XPath($"//input[@name='selected[]']")).Click();
- 
             return this;
         }
         public GroupHelper SubmitDeleteGroup()

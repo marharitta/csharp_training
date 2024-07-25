@@ -51,7 +51,7 @@ namespace Addressbook_web_tests
         }
        public ContactHelper InitContactModification(int v)
         {
-            driver.FindElement(By.XPath($"(//img[@alt='Edit'])[{v}]")).Click();
+            driver.FindElement(By.XPath($"//*[@id='maintable']/tbody/tr[{v+2}]/td[8]/a/img")).Click();
             return this;
         }
         public ContactHelper SubmiteContactCreation()
