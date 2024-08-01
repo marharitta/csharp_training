@@ -10,7 +10,7 @@ namespace Addressbook_web_tests
 {
     public class GroupHelper: HelperBase
     {
-       
+        private List<GroupData> groupCache = null;
         public GroupHelper(ApplicationManager manager) : base(manager)
         {
         }
@@ -41,6 +41,7 @@ namespace Addressbook_web_tests
 
             SelectGroup(v);
             SubmitDeleteGroup();
+            manager.Navigator.GoToGroupsPage();
             return this;
         }
         public GroupHelper ReturnToGroupPage()
@@ -52,6 +53,7 @@ namespace Addressbook_web_tests
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -87,12 +89,14 @@ namespace Addressbook_web_tests
         public GroupHelper SubmitDeleteGroup()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[5]")).Click();
+            groupCache = null;
             return this;
         }
 
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            groupCache = null;
             return this;
         }
 
@@ -102,16 +106,27 @@ namespace Addressbook_web_tests
             return this;
         }
 
+
         public List<GroupData> GetGroupList()
         {
-            List<GroupData> groups = new List<GroupData>();
-            manager.Navigator.GoToGroupsPage();
-            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
-            foreach (IWebElement element in elements)
+            if (groupCache == null)
             {
-                groups.Add(new GroupData(element.Text));
+                groupCache = new List<GroupData>();
+                manager.Navigator.GoToGroupsPage();
+                ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+                foreach (IWebElement element in elements)
+                {
+                    groupCache.Add(new GroupData(element.Text){
+                        Id =element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
             }
-            return groups;
+            return new List<GroupData>(groupCache);
+        }
+
+        public int GetGroupCount()
+        {
+            return driver.FindElements(By.CssSelector("span.group")).Count();
         }
     }
 }

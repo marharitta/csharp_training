@@ -66,194 +66,25 @@ namespace Addressbook_web_tests
                 return FirstName.CompareTo(other.FirstName);
             }
         }
+        public string Id { get; set; }
+        public string FirstName { get; set; }
 
-        public string FirstName
-        {
-            get
-            {
-                return firstName;
-            }
-            set
-            {
-                firstName = value;
-            }
-        }
-
-        public string LastName
-        {
-            get
-            {
-                return lastname;
-            }
-            set
-            {
-                lastname = value;
-            }
-        }
-        public string MiddleName
-        {
-            get
-            {
-                return middlename;
-            }
-            set
-            {
-                middlename = value;
-            }
-        }
-        public string Nickname
-        {
-            get
-            {
-                return nickname;
-            }
-            set
-            {
-                nickname = value;
-            }
-        }
-        public string Title
-        {
-            get
-            {
-                return title;
-            }
-            set
-            {
-                title = value;
-            }
-        }
-        public string Company
-        {
-            get
-            {
-                return company;
-            }
-            set
-            {
-                company = value;
-            }
-        }
-        public string Address
-        {
-            get
-            {
-                return address;
-            }
-            set
-            {
-                address = value;
-            }
-        }
-        public string TelephoneHome
-        {
-            get
-            {
-                return telephoneHome;
-            }
-            set
-            {
-                telephoneHome = value;
-            }
-        }
-        public string Mobile
-        {
-            get
-            {
-                return mobile;
-            }
-            set
-            {
-                mobile = value;
-            }
-        }
-        public string Telwork
-        {
-            get
-            {
-                return telwork;
-            }
-            set
-            {
-                telwork = value;
-            }
-        }
-        public string Fax
-        {
-            get
-            {
-                return fax;
-            }
-            set
-            {
-                fax = value;
-            }
-        }
-        public string Email
-        {
-            get
-            {
-                return email;
-            }
-            set
-            {
-                email = value;
-            }
-        }
-        public string HomePage
-        {
-            get
-            {
-                return homePage;
-            }
-            set
-            {
-                homePage = value;
-            }
-        }
-        public string Bday
-        {
-            get
-            {
-                return bday;
-            }
-            set
-            {
-                bday = value;
-            }
-        }
-        public string Bmonth
-        {
-            get
-            {
-                return bmonth;
-            }
-            set
-            {
-                bmonth = value;
-            }
-        }
-        public string Byear
-        {
-            get
-            {
-                return byear;
-            }
-            set
-            {
-                byear = value;
-            }
-        }
-        public string Group
-        {
-            get
-            {
-                return group;
-            }
-            set
-            {
-                group = value;
-            }
-        }
+        public string LastName { get; set; }
+ 
+        public string MiddleName { get; set; }
+        public string Nickname { get; set; }
+        public string Title { get; set; }
+        public string Company { get; set; }
+        public string Address { get; set; }
+        public string TelephoneHome { get; set; }
+        public string Mobile { get; set; }
+        public string Telwork { get; set; }
+        public string Fax { get; set; }
+        public string Email { get; set; }
+        public string HomePage { get; set; }
+        public string Bday { get; set; }
+        public string Bmonth { get; set; }
+        public string Byear { get; set; }
+        public string Group { get; set; }
     }
 }

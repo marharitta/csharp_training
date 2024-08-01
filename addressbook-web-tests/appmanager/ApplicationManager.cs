@@ -25,7 +25,7 @@ namespace Addressbook_web_tests
         private ApplicationManager() 
         {
             driver = new FirefoxDriver();
-            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(5);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(7);
             baseURL = "http://localhost:8080/";
             verificationErrors = new StringBuilder();
 

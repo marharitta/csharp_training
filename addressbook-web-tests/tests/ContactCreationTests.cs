@@ -1,4 +1,6 @@
-﻿namespace Addressbook_web_tests
+﻿using System.Security.Cryptography;
+
+namespace Addressbook_web_tests
 {
         [TestFixture]
         public class ContactCreationTests : AuthTestBase
@@ -11,12 +13,14 @@
                 contact.FirstName = "Petr"; 
                 contact.LastName = "Petrov";
 
-            List<ContactData> oldContact = app.Contact.GetContactList();
+            List<ContactData> oldContacts = app.Contact.GetContactList();
 
             app.Contact.Create(contact);
 
+            Assert.AreEqual(oldContacts.Count + 1, app.Contact.GetContactCount());
+
             List<ContactData> newContact = app.Contact.GetContactList();
-            Assert.AreEqual(oldContact.Count + 1, newContact.Count);
+            Assert.AreEqual(oldContacts.Count + 1, newContact.Count);
 
 
         }

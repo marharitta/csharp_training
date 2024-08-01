@@ -20,6 +20,7 @@ namespace Addressbook_web_tests
             int modifyIndex = 0;
 
             List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
             if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == true)
             {
                 app.Groups.Modify(modifyIndex, newData);
@@ -35,11 +36,23 @@ namespace Addressbook_web_tests
                 app.Groups.Modify(0, newData);
             }
 
+            Assert.AreEqual(oldGroups.Count , app.Groups.GetGroupCount());
+
             List<GroupData> newGroups = app.Groups.GetGroupList();
             oldGroups[modifyIndex].Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
+
+            foreach (GroupData group in newGroups)
+            {
+                if(group.Id == oldData.Id)
+                {
+                    Assert.AreEqual(newData.Name, group.Name);
+                }
+                
+            }
+
         }
     }
 }

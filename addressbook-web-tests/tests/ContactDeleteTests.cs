@@ -13,7 +13,7 @@ namespace Addressbook_web_tests
         [Test]
         public void DeleteContactTest()
         {
-            List<ContactData> oldContact = app.Contact.GetContactList();
+            List<ContactData> oldContacts = app.Contact.GetContactList();
 
             if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
             {
@@ -30,10 +30,12 @@ namespace Addressbook_web_tests
                 app.Contact.Remove(0);
             }
 
+            Assert.AreEqual(oldContacts.Count -1, app.Contact.GetContactCount());
+
             List<ContactData> newContact = app.Contact.GetContactList();
 
-            oldContact.RemoveAt(0);
-            Assert.AreEqual(oldContact, newContact);
+            oldContacts.RemoveAt(0);
+            Assert.AreEqual(oldContacts, newContact);
 
         }
     }
