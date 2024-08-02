@@ -17,23 +17,18 @@ namespace Addressbook_web_tests
             newContact.Email = null;
             newContact.Telwork = null;
 
-            List<ContactData> oldContacts = app.Contact.GetContactList();
-            ContactData oldData = oldContacts[0];
-
-            if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
-            {
-                app.Contact.Modify(0, newContact);
-            }
-            else
+            if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == false)
             {
                 ContactData contact = new ContactData();
                 contact.FirstName = "Petr";
                 contact.LastName = "Petrov";
 
                 app.Contact.Create(contact);
-
-                app.Contact.Modify(0, newContact);
             }
+                app.Contact.Modify(0, newContact);
+
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+            ContactData oldData = oldContacts[0];
 
             Assert.AreEqual(oldContacts.Count, app.Contact.GetContactCount());
 

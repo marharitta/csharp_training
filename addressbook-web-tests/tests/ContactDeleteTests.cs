@@ -13,23 +13,19 @@ namespace Addressbook_web_tests
         [Test]
         public void DeleteContactTest()
         {
-            List<ContactData> oldContacts = app.Contact.GetContactList();
-
-            if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
-            {
-                app.Contact.Remove(0);
-            }
-            else
+            if (app.Groups.IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == false)
             {
                 ContactData contact = new ContactData();
                 contact.FirstName = "Petr";
                 contact.LastName = "Petrov";
 
                 app.Contact.Create(contact);
-
-                app.Contact.Remove(0);
             }
 
+            List<ContactData> oldContacts = app.Contact.GetContactList();
+
+            app.Contact.Remove(0);
+            
             Assert.AreEqual(oldContacts.Count -1, app.Contact.GetContactCount());
 
             List<ContactData> newContact = app.Contact.GetContactList();

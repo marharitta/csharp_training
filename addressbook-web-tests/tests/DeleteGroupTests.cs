@@ -10,22 +10,20 @@ namespace Addressbook_web_tests
         [Test]
         public void DeleteGroupTest()
         {
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            app.Navigator.GoToGroupsPage();
 
-            if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == true)
-            {
-                app.Groups.Remove(0);
-            }
-            else
+            if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == false)
             {
                 GroupData group = new GroupData("aaa");
                 group.Footer = "fff";
                 group.Header = "ddd";
 
                 app.Groups.Create(group);
-
-                app.Groups.Remove(0);
             }
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+
+            app.Groups.Remove(0);
 
             Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
 

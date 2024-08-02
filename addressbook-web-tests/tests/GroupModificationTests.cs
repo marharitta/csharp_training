@@ -19,22 +19,20 @@ namespace Addressbook_web_tests
             newData.Header = null;
             int modifyIndex = 0;
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            GroupData oldData = oldGroups[0];
-            if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == true)
-            {
-                app.Groups.Modify(modifyIndex, newData);
-            }
-            else
+            app.Navigator.GoToGroupsPage();
+            if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == false)
             {
                 GroupData group = new GroupData("aaa");
                 group.Footer = "fff";
                 group.Header = "ddd";
 
                 app.Groups.Create(group);
-
-                app.Groups.Modify(0, newData);
             }
+
+            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            GroupData oldData = oldGroups[0];
+
+            app.Groups.Modify(0, newData);
 
             Assert.AreEqual(oldGroups.Count , app.Groups.GetGroupCount());
 
