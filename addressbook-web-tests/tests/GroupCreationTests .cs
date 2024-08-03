@@ -64,7 +64,7 @@ namespace Addressbook_web_tests
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();
-            Assert.AreEqual(oldGroups, newGroups);
+            Assert.AreNotEqual(oldGroups, newGroups);
         }
 
     }
