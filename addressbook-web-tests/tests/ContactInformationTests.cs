@@ -21,5 +21,30 @@ namespace Addressbook_web_tests
             Assert.AreEqual(fromForm.Address, fromTable.Address);
             Assert.AreEqual(fromTable.AllPhones, fromForm.AllPhones);
         }
+        [Test]
+        public void TestContactInformationGlue()
+        {
+            ContactData datafromTable = app.Contacts.GetContactInformationFromTable(0);
+            ContactData dataFromForm = app.Contacts.GetContactInformationFromEditForm(0);
+
+            string fromTable = app.Contacts.Glue(datafromTable);
+            string fromForm = app.Contacts.Glue(dataFromForm);
+
+            // verification
+            Assert.AreEqual(fromTable, fromForm);
+        }
+
+
+        [Test]
+        public void TestDetailContactInformation()
+        {
+            string fromProperty = app.Contacts.GetContactInformationFromProperty(0);
+            ContactData dataFromForm = app.Contacts.GetContactInformationFromEditForm(0);
+
+            string fromForm = app.Contacts.Glue(dataFromForm);
+
+            // verification
+            Assert.AreEqual(fromProperty, fromForm);
+        }
     }
 }

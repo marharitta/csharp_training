@@ -1,4 +1,5 @@
 ﻿using System.Xml.Linq;
+using System.Text.RegularExpressions;
 
 namespace Addressbook_web_tests
 {
@@ -108,7 +109,7 @@ namespace Addressbook_web_tests
             {
                 return "";
             }
-            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+ "\r\n";
+            return Regex.Replace(phone,"[ -()]", "") + "\r\n";
         }
 
         public string Fax { get; set; }

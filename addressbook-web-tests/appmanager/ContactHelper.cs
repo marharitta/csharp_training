@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.DevTools;
 using OpenQA.Selenium.DevTools.V123.Autofill;
+using System.Text.RegularExpressions;
+using System.Numerics;
 
 namespace Addressbook_web_tests
 {
@@ -167,18 +169,55 @@ namespace Addressbook_web_tests
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
+            string nick = driver.FindElement(By.Name("nickname")).GetAttribute("value");
+
 
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
 
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+
             return new ContactData(firstName, lastName)
             {
                 Address = address,
+                Nickname = nick,
                 TelephoneHome = homePhone,
                 Mobile = mobilePhone,
-                Telwork = workPhone
+                Telwork = workPhone,
+                Email = email
             };
+        }
+        public int GetNumberOfSearchResults()
+        {
+            manager.Navigator.OpenHomePage();
+            string text = driver.FindElement(By.TagName("label")).Text;
+            Match m = new Regex(@"\d+").Match(text);
+            return Int32.Parse(m.Value);
+        }
+
+        public string GetContactInformationFromProperty(int index)
+        {
+            manager.Navigator.OpenHomePage();
+            driver.FindElement(By.XPath($"//*[@id='maintable']/tbody/tr[{index + 2}]/td[7]/a/img")).Click();
+
+            var element = driver.FindElement(By.XPath($"//*[@id=\"content\"]"));
+            string text = element.Text;
+
+            if (text == null)
+            { 
+                return "";
+            }
+
+            return Regex.Replace(text, "\r\n", "") ;
+        }
+
+        public string Glue(ContactData contactData)
+        {
+     //       if ()
+            string text = $"{contactData.FirstName} {contactData.LastName}{contactData.Nickname}{contactData.Address}H: {contactData.TelephoneHome}" +
+                $"M: {contactData.Mobile}W: {contactData.Telwork}{contactData.Email}";
+            return text ;
         }
     }
 }
