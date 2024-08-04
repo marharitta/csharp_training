@@ -24,6 +24,8 @@ namespace Addressbook_web_tests
         private string byear = "";
         private string group = "";
 
+        private string allPhones;
+
         public bool Equals(ContactData other)
         {
             if (Object.ReferenceEquals(this, null))
@@ -66,6 +68,13 @@ namespace Addressbook_web_tests
                 return FirstName.CompareTo(other.FirstName);
             }
         }
+        public ContactData() { }
+        public ContactData(string firstName, string lastName)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+           
+        }
         public string Id { get; set; }
         public string FirstName { get; set; }
 
@@ -79,6 +88,29 @@ namespace Addressbook_web_tests
         public string TelephoneHome { get; set; }
         public string Mobile { get; set; }
         public string Telwork { get; set; }
+        public string AllPhones 
+        {
+            get
+            {
+                if (allPhones != null)
+                { return allPhones; }
+                else { return CleanUp( TelephoneHome) + CleanUp(Mobile ) + CleanUp(Telwork).Trim(); }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return phone.Replace(" ", "").Replace("-", "").Replace("(", "").Replace(")", "")+ "\r\n";
+        }
+
         public string Fax { get; set; }
         public string Email { get; set; }
         public string HomePage { get; set; }

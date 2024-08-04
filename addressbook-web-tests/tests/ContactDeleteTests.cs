@@ -19,16 +19,16 @@ namespace Addressbook_web_tests
                 contact.FirstName = "Petr";
                 contact.LastName = "Petrov";
 
-                app.Contact.Create(contact);
+                app.Contacts.Create(contact);
             }
 
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-            app.Contact.Remove(0);
+            app.Contacts.Remove(0);
             
-            Assert.AreEqual(oldContacts.Count -1, app.Contact.GetContactCount());
+            Assert.AreEqual(oldContacts.Count -1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContacts = app.Contact.GetContactList();
+            List<ContactData> newContacts = app.Contacts.GetContactList();
             ContactData  toBeRemoved = oldContacts[0];
 
             oldContacts.RemoveAt(0);

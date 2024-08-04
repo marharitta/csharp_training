@@ -78,7 +78,7 @@ namespace Addressbook_web_tests
         { 
             get{ return groupHelper; }
         }
-        public ContactHelper Contact
+        public ContactHelper Contacts
         {
             get { return contactHelper;  }
         }

@@ -13,13 +13,13 @@ namespace Addressbook_web_tests
                 contact.FirstName = "Petr"; 
                 contact.LastName = "Petrov";
 
-            List<ContactData> oldContacts = app.Contact.GetContactList();
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
 
-            app.Contact.Create(contact);
+            app.Contacts.Create(contact);
 
-            Assert.AreEqual(oldContacts.Count + 1, app.Contact.GetContactCount());
+            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
 
-            List<ContactData> newContact = app.Contact.GetContactList();
+            List<ContactData> newContact = app.Contacts.GetContactList();
             Assert.AreEqual(oldContacts.Count + 1, newContact.Count);
 
 
