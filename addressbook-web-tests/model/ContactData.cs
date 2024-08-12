@@ -49,7 +49,7 @@ namespace Addressbook_web_tests
 
         public override string ToString()
         {
-            return "name=" + FirstName;
+            return "name=" + FirstName + ";lastname=" + LastName;
         }
 
         public int CompareTo(ContactData other)
@@ -94,8 +94,32 @@ namespace Addressbook_web_tests
             get
             {
                 if (allPhones != null)
-                { return allPhones; }
-                else { return CleanUp( TelephoneHome) + CleanUp(Mobile ) + CleanUp(Telwork).Trim(); }
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    List<string> phones = new List<string>();
+                    string tel1 = CleanUp(TelephoneHome);
+                    if (!string.IsNullOrEmpty(tel1))
+                    {
+                        phones.Add(tel1);
+                    }
+
+                    string tel2 = CleanUp(Mobile);
+                    if (!string.IsNullOrEmpty(tel2))
+                    {
+                        phones.Add(tel2);
+                    }
+
+                    string tel3 = CleanUp(Telwork);
+                    if (!string.IsNullOrEmpty(tel3))
+                    {
+                        phones.Add(tel3);
+                    }
+                    
+                    return string.Join("\r\n", phones);
+                }
             }
             set
             {
@@ -109,7 +133,7 @@ namespace Addressbook_web_tests
             {
                 return "";
             }
-            return Regex.Replace(phone,"[ -()]", "") + "\r\n";
+            return Regex.Replace(phone, "[ -()]", "");// + "\r\n";
         }
 
         private string GetPhoneLabel(string phone, string label)

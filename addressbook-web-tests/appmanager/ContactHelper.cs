@@ -166,18 +166,18 @@ namespace Addressbook_web_tests
         {
             manager.Navigator.OpenHomePage();
             InitContactModification(0);
-            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
-            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value");
-            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
-            string address = driver.FindElement(By.Name("address")).GetAttribute("value");
-            string nick = driver.FindElement(By.Name("nickname")).GetAttribute("value");
+            string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value").Trim();
+            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value").Trim();
+            string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value").Trim();
+            string address = driver.FindElement(By.Name("address")).GetAttribute("value").Trim();
+            string nick = driver.FindElement(By.Name("nickname")).GetAttribute("value").Trim();
 
 
-            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value");
-            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value");
-            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value");
+            string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value").Trim();
+            string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value").Trim();
+            string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value").Trim();
 
-            string email = driver.FindElement(By.Name("email")).GetAttribute("value");
+            string email = driver.FindElement(By.Name("email")).GetAttribute("value").Trim();
 
 
 
