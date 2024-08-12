@@ -27,8 +27,8 @@ namespace Addressbook_web_tests
             ContactData datafromTable = app.Contacts.GetContactInformationFromTable(0);
             ContactData dataFromForm = app.Contacts.GetContactInformationFromEditForm(0);
 
-            string fromTable = app.Contacts.Glue(datafromTable);
-            string fromForm = app.Contacts.Glue(dataFromForm);
+            string fromTable = app.Contacts.Glue(datafromTable, false);
+            string fromForm = app.Contacts.Glue(dataFromForm, false );
 
             // verification
             Assert.AreEqual(fromTable, fromForm);
@@ -41,7 +41,7 @@ namespace Addressbook_web_tests
             string fromProperty = app.Contacts.GetContactInformationFromProperty(0);
             ContactData dataFromForm = app.Contacts.GetContactInformationFromEditForm(0);
 
-            string fromForm = app.Contacts.Glue(dataFromForm);
+            string fromForm = app.Contacts.Glue(dataFromForm, true);
 
             // verification
             Assert.AreEqual(fromProperty, fromForm);

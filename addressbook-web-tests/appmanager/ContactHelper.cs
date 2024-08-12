@@ -167,6 +167,7 @@ namespace Addressbook_web_tests
             manager.Navigator.OpenHomePage();
             InitContactModification(0);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value");
+            string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value");
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value");
             string address = driver.FindElement(By.Name("address")).GetAttribute("value");
             string nick = driver.FindElement(By.Name("nickname")).GetAttribute("value");
@@ -178,8 +179,11 @@ namespace Addressbook_web_tests
 
             string email = driver.FindElement(By.Name("email")).GetAttribute("value");
 
+
+
             return new ContactData(firstName, lastName)
-            {
+            { 
+                MiddleName = middleName,
                 Address = address,
                 Nickname = nick,
                 TelephoneHome = homePhone,
@@ -212,12 +216,21 @@ namespace Addressbook_web_tests
             return Regex.Replace(text, "\r\n", "") ;
         }
 
-        public string Glue(ContactData contactData)
+        public string Glue(ContactData contactData, bool isFromProperty)
         {
-     //       if ()
-            string text = $"{contactData.FirstName} {contactData.LastName}{contactData.Nickname}{contactData.Address}H: {contactData.TelephoneHome}" +
-                $"M: {contactData.Mobile}W: {contactData.Telwork}{contactData.Email}";
-            return text ;
+            string text;
+            if (isFromProperty == false)
+            {              
+                text = $"{contactData.FirstName.Trim()} {contactData.LastName.Trim()}{contactData.Address.Trim()}{contactData.AllPhones.Trim()}";
+                text= Regex.Replace(text,"\r\n", "");
+            }
+            else
+            {
+
+                 text = $"{contactData.FirstName.Trim()} {contactData.MiddleName.Trim()} {contactData.LastName.Trim()}{contactData.Nickname.Trim()}{contactData.Address.Trim()}{contactData.GetPhonesLabel().Trim()}{contactData.Email.Trim()}";
+            }
+
+            return text;
         }
     }
 }

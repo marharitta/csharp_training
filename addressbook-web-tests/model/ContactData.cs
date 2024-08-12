@@ -112,6 +112,16 @@ namespace Addressbook_web_tests
             return Regex.Replace(phone,"[ -()]", "") + "\r\n";
         }
 
+        private string GetPhoneLabel(string phone, string label)
+        {
+            if (string.IsNullOrWhiteSpace(phone))
+            {
+                return "";
+            }
+
+            return $"{label}: {phone}";
+        }
+
         public string Fax { get; set; }
         public string Email { get; set; }
         public string HomePage { get; set; }
@@ -119,5 +129,14 @@ namespace Addressbook_web_tests
         public string Bmonth { get; set; }
         public string Byear { get; set; }
         public string Group { get; set; }
+
+        public string GetPhonesLabel()
+        {
+            return $"{GetPhoneLabel(TelephoneHome, "H")}{GetPhoneLabel(Mobile, "M")}{GetPhoneLabel(Telwork, "W")}";
+        }
+        public string regexProperty(string text)
+        {
+            return Regex.Replace(text, " ", "");
+        }
     }
 }
