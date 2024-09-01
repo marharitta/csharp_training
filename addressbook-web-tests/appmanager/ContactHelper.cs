@@ -169,6 +169,7 @@ namespace Addressbook_web_tests
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value").Trim();
             string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value").Trim();
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value").Trim();
+            string company = driver.FindElement(By.Name("company")).GetAttribute("value").Trim();
             string address = driver.FindElement(By.Name("address")).GetAttribute("value").Trim();
             string nick = driver.FindElement(By.Name("nickname")).GetAttribute("value").Trim();
 
@@ -184,6 +185,7 @@ namespace Addressbook_web_tests
             return new ContactData(firstName, lastName)
             { 
                 MiddleName = middleName,
+                Company = company,
                 Address = address,
                 Nickname = nick,
                 TelephoneHome = homePhone,
@@ -213,7 +215,7 @@ namespace Addressbook_web_tests
                 return "";
             }
 
-            return Regex.Replace(text, "\r\n", "") ;
+            return text; //Regex.Replace(text, "\r\n", "") ;
         }
 
         public string Glue(ContactData contactData, bool isFromProperty)
@@ -227,7 +229,7 @@ namespace Addressbook_web_tests
             else
             {
 
-                 text = $"{contactData.FirstName.Trim()} {contactData.MiddleName.Trim()} {contactData.LastName.Trim()}{contactData.Nickname.Trim()}{contactData.Address.Trim()}{contactData.GetPhonesLabel().Trim()}{contactData.Email.Trim()}";
+                 text = $"{contactData.FirstName.Trim()} {contactData.MiddleName.Trim()} {contactData.LastName.Trim()}\r\n{contactData.Nickname.Trim()}\r\n{contactData.Company.Trim()}\r\n{contactData.Address.Trim()}\r\n\r\n{contactData.GetPhonesLabel().Trim()}\r\n\r\n{contactData.Email.Trim()}";
             }
 
             return text;

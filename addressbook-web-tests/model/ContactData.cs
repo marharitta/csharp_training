@@ -156,7 +156,7 @@ namespace Addressbook_web_tests
 
         public string GetPhonesLabel()
         {
-            return $"{GetPhoneLabel(TelephoneHome, "H")}{GetPhoneLabel(Mobile, "M")}{GetPhoneLabel(Telwork, "W")}";
+            return $"{GetPhoneLabel(TelephoneHome, "H")}\r\n{GetPhoneLabel(Mobile, "M")}\r\n{GetPhoneLabel(Telwork, "W")}";
         }
         public string regexProperty(string text)
         {
