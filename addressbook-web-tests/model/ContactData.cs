@@ -148,6 +148,8 @@ namespace Addressbook_web_tests
 
         public string Fax { get; set; }
         public string Email { get; set; }
+        public string Email2 { get; set; }
+        public string Email3 { get; set; }
         public string HomePage { get; set; }
         public string Bday { get; set; }
         public string Bmonth { get; set; }
@@ -156,7 +158,11 @@ namespace Addressbook_web_tests
 
         public string GetPhonesLabel()
         {
-            return $"{GetPhoneLabel(TelephoneHome, "H")}\r\n{GetPhoneLabel(Mobile, "M")}\r\n{GetPhoneLabel(Telwork, "W")}";
+
+            return GetPhoneLabel(TelephoneHome, "H")
+                .AppendSafeWithNewLine(GetPhoneLabel(Mobile, "M"))
+                .AppendSafeWithNewLine(GetPhoneLabel(Telwork, "W"))
+                .AppendSafeWithNewLine(GetPhoneLabel(Fax, "F"));
         }
         public string regexProperty(string text)
         {

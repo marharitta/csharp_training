@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Text;
 using OpenQA.Selenium;
-using OpenQA.Selenium.DevTools;
-using OpenQA.Selenium.DevTools.V123.Autofill;
 using System.Text.RegularExpressions;
-using System.Numerics;
 
 namespace Addressbook_web_tests
 {
@@ -173,14 +166,14 @@ namespace Addressbook_web_tests
             string address = driver.FindElement(By.Name("address")).GetAttribute("value").Trim();
             string nick = driver.FindElement(By.Name("nickname")).GetAttribute("value").Trim();
 
-
             string homePhone = driver.FindElement(By.Name("home")).GetAttribute("value").Trim();
             string mobilePhone = driver.FindElement(By.Name("mobile")).GetAttribute("value").Trim();
             string workPhone = driver.FindElement(By.Name("work")).GetAttribute("value").Trim();
+            string faxPhone = driver.FindElement(By.Name("fax")).GetAttribute("value").Trim();
 
             string email = driver.FindElement(By.Name("email")).GetAttribute("value").Trim();
-
-
+            string email2 = driver.FindElement(By.Name("email2")).GetAttribute("value").Trim();
+            string email3 = driver.FindElement(By.Name("email3")).GetAttribute("value").Trim();
 
             return new ContactData(firstName, lastName)
             { 
@@ -191,7 +184,10 @@ namespace Addressbook_web_tests
                 TelephoneHome = homePhone,
                 Mobile = mobilePhone,
                 Telwork = workPhone,
-                Email = email
+                Fax = faxPhone,
+                Email = email,
+                Email2 = email2,
+                Email3 = email3
             };
         }
         public int GetNumberOfSearchResults()
@@ -228,11 +224,32 @@ namespace Addressbook_web_tests
             }
             else
             {
+                string phoneLine = contactData.GetPhonesLabel();
+                string result = contactData.FirstName.Trim()
+                    .Append(contactData.MiddleName)
+                    .Append(contactData.LastName)
+                    .AppendSafeWithNewLine(contactData.Nickname)
+                    .AppendSafeWithNewLine(contactData.Company)
+                    .AppendSafeWithNewLine(contactData.Address);
 
-                 text = $"{contactData.FirstName.Trim()} {contactData.MiddleName.Trim()} {contactData.LastName.Trim()}\r\n{contactData.Nickname.Trim()}\r\n{contactData.Company.Trim()}\r\n{contactData.Address.Trim()}\r\n\r\n{contactData.GetPhonesLabel().Trim()}\r\n\r\n{contactData.Email.Trim()}";
+                if (!string.IsNullOrEmpty(phoneLine))
+                {
+                    result = result.AppendLine()
+                        .AppendSafeWithNewLine(phoneLine);
+                }
+
+                if (!string.IsNullOrEmpty(contactData.Email))
+                {
+                    result = result.AppendLine()
+                        .AppendSafeWithNewLine(contactData.Email);
+                }
+
+                text = result;
             }
 
             return text;
         }
+
+
     }
 }
