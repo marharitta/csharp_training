@@ -25,8 +25,6 @@ namespace Addressbook_web_tests
             return contacts;
         }
 
-        public static ContactData FixureData = new ContactData("first", "last");
-
         [Test, TestCaseSource(nameof(RandomContactDataProvider))]
         public void TheContactCreationTestCaseTest(ContactData contact)
         {
