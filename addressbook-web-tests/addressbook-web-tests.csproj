@@ -8,6 +8,7 @@
 
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+	<RunSettingsFilePath>$(MSBuildProjectDirectory)\nunit.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <ItemGroup>
