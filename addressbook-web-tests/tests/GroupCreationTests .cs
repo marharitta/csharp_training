@@ -1,5 +1,8 @@
 ﻿
 
+using System.Xml.Serialization;
+using Newtonsoft.Json;
+
 namespace Addressbook_web_tests
 {
     [TestFixture]
@@ -19,7 +22,7 @@ namespace Addressbook_web_tests
             return groups;
         }
 
-        public static IEnumerable<GroupData> GroupDataFromFile()
+        public static IEnumerable<GroupData> GroupDataFromCsvFile()
         {
             List<GroupData> groups = new List<GroupData>();
             string[] lines = File.ReadAllLines(@"group.csv");
@@ -35,8 +38,22 @@ namespace Addressbook_web_tests
             return groups;
         }
 
+        public static IEnumerable<GroupData> GroupDataFromXmlFile()
+        {
+            return (List<GroupData>) 
+                new XmlSerializer(typeof(List<GroupData>))
+                    .Deserialize(new StreamReader(@"groups.xml"));
+            
+        }
+        public static IEnumerable<GroupData> GroupDataFromJsonFile()
+        {
 
-       [Test, TestCaseSource("GroupDataFromFile")] //"RandomGroupDataProvider"
+            return JsonConvert.DeserializeObject<List<GroupData>>(
+                File.ReadAllText(@"groups.json"));
+
+        }
+
+        [Test, TestCaseSource("GroupDataFromJsonFile")] //"RandomGroupDataProvider"
         public void GroupCreationTest(GroupData group)
         {
 
