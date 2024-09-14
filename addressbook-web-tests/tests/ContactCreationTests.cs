@@ -1,4 +1,5 @@
 ﻿using System.Security.Cryptography;
+using Newtonsoft.Json;
 
 namespace Addressbook_web_tests
 {
@@ -24,8 +25,16 @@ namespace Addressbook_web_tests
 
             return contacts;
         }
+        public static IEnumerable<ContactData> ContactDataFromJsonFile()
+        {
 
-        [Test, TestCaseSource(nameof(RandomContactDataProvider))]
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contacts.json"));
+
+        }
+        
+
+        [Test, TestCaseSource("ContactDataFromJsonFile")]//nameof(RandomContactDataProvider)
         public void TheContactCreationTestCaseTest(ContactData contact)
         {
 
