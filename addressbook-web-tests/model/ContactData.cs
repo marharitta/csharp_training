@@ -1,8 +1,10 @@
 ﻿using System.Xml.Linq;
 using System.Text.RegularExpressions;
+using LinqToDB.Mapping;
 
 namespace Addressbook_web_tests
 {
+    [Table(Name = "addressbook")]
     public class ContactData: IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstName = "";
@@ -76,9 +78,13 @@ namespace Addressbook_web_tests
             LastName = lastName;
            
         }
+        [Column(Name = "id"), PrimaryKey]
         public string Id { get; set; }
+
+        [Column(Name = "firstname")]
         public string FirstName { get; set; }
 
+        [Column(Name = "lastname")]
         public string LastName { get; set; }
  
         public string MiddleName { get; set; }
@@ -89,6 +95,9 @@ namespace Addressbook_web_tests
         public string TelephoneHome { get; set; }
         public string Mobile { get; set; }
         public string Telwork { get; set; }
+
+        [Column(Name = "deprecated")]
+        public string Deprecated {  get; set; }
         public string AllPhones 
         {
             get
@@ -168,5 +177,13 @@ namespace Addressbook_web_tests
         {
             return Regex.Replace(text, " ", "");
         }
+        public static List<ContactData> GetAll()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+            }
+        }
     }
+
 }

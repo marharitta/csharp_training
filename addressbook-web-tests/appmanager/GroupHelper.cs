@@ -44,6 +44,15 @@ namespace Addressbook_web_tests
             manager.Navigator.GoToGroupsPage();
             return this;
         }
+        public GroupHelper Remove(GroupData group)
+        {
+            manager.Navigator.GoToGroupsPage();
+
+            SelectGroup(group.Id);
+            SubmitDeleteGroup();
+            manager.Navigator.GoToGroupsPage();
+            return this;
+        }
         public GroupHelper ReturnToGroupPage()
         {
             driver.FindElement(By.LinkText("group page")).Click();
@@ -84,6 +93,13 @@ namespace Addressbook_web_tests
                 driver.FindElement(By.XPath($"//div[@id='content']/form/span[{p+1}]/input")).Click();
             }
 
+            return this;
+        }
+
+        public GroupHelper SelectGroup(string Id)
+        {
+   
+            driver.FindElement(By.XPath("(//input[@name='selected[]' and @value='"+Id+"'])")).Click();
             return this;
         }
         public GroupHelper SubmitDeleteGroup()
@@ -142,5 +158,7 @@ namespace Addressbook_web_tests
         {
             return driver.FindElements(By.CssSelector("span.group")).Count();
         }
+
+
     }
 }
