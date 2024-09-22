@@ -181,7 +181,7 @@ namespace Addressbook_web_tests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from c in db.Contacts.Where(x => x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
+                return (from c in db.Contacts.Where(x => x.Deprecated == null || x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
             }
         }
     }
