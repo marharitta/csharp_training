@@ -1,5 +1,4 @@
-﻿using System.Xml.Linq;
-using System.Text.RegularExpressions;
+﻿using System.Text.RegularExpressions;
 using LinqToDB.Mapping;
 
 namespace Addressbook_web_tests
@@ -40,6 +39,7 @@ namespace Addressbook_web_tests
             {
                 return true;
             }
+
             return FirstName == other.FirstName && LastName == other.LastName;
         }
 
@@ -181,7 +181,7 @@ namespace Addressbook_web_tests
         {
             using (AddressBookDB db = new AddressBookDB())
             {
-                return (from c in db.Contacts.Where(x => x.Deprecated == null || x.Deprecated == "0000-00-00 00:00:00") orderby c.Id select c).ToList();
+                return (from c in db.Contacts.Where(x => x.Deprecated == null || x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
             }
         }
     }

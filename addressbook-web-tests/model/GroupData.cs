@@ -76,5 +76,21 @@ namespace Addressbook_web_tests
                                 select c).Distinct().ToList();
             }
         }
+
+        public static GroupData GetOneByIndex(int index)
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Groups orderby g.Id ascending select g).Skip(index).Take(1).FirstOrDefault();
+            }
+        }
+
+        public static GroupData GetOneWithContacts()
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Groups join cdr in db.GCR on g.Id equals cdr.GroupId orderby g.Id ascending select g).Take(1).FirstOrDefault();
+            }
+        }
     }
 }

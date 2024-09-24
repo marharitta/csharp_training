@@ -1,20 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Addressbook_web_tests
+﻿namespace Addressbook_web_tests
 {
     public class AddingContactToGroupTests : AuthTestBase
     {
         [Test]
         public void TestAddingContactToGroup()
         {
-            GroupData group = GroupData.GetAll()[0];
+            GroupData group = GroupData.GetOneByIndex(0);
             List<ContactData> oldList = group.GetContacts();
 
-            ContactData contact = ContactData.GetAll().Except(oldList).First();
+            ContactData contact = ContactData.GetAll().First(x => !oldList.Any(y => y.Id == x.Id));
 
             app.Contacts.AddContactToGroup(contact, group);
 
@@ -24,8 +18,6 @@ namespace Addressbook_web_tests
             oldList.Sort();
 
             Assert.AreEqual(oldList, newList);
-
         }
-            
     }
 }
