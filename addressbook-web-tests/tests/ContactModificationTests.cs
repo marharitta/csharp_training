@@ -25,14 +25,16 @@ namespace Addressbook_web_tests
 
                 app.Contacts.Create(contact);
             }
-                app.Contacts.Modify(0, newContact);
+            
+            app.Contacts.Modify(0, newContact);
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
             ContactData oldData = oldContacts[0];
 
-            Assert.AreEqual(oldContacts.Count, app.Contacts.GetContactCount());
+            List<ContactData> newContacts = ContactData.GetAll();
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            Assert.AreEqual(oldContacts.Count, newContacts.Count);
+
             oldContacts[0].FirstName = newContact.FirstName;
             oldContacts[0].LastName = newContact.LastName;
             oldContacts.Sort();

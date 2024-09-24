@@ -29,24 +29,26 @@ namespace Addressbook_web_tests
                 app.Groups.Create(group);
             }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            GroupData oldData = oldGroups[0];
+            List<GroupData> oldGroups = GroupData.GetAll(); 
+            GroupData oldData = oldGroups[modifyIndex];
 
-            app.Groups.Modify(0, newData);
+            app.Groups.Modify(oldData.Id, newData);
+            List<GroupData> newGroups = GroupData.GetAll();
 
-            Assert.AreEqual(oldGroups.Count , app.Groups.GetGroupCount());
+            Assert.AreEqual(oldGroups.Count , newGroups.Count);
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            oldGroups[modifyIndex].Name = newData.Name;
+            oldData.Name = newData.Name;
             oldGroups.Sort();
             newGroups.Sort();
+
             Assert.AreEqual(oldGroups, newGroups);
 
             foreach (GroupData group in newGroups)
             {
-                if(group.Id == oldData.Id)
+                if (group.Id == oldData.Id)
                 {
                     Assert.AreEqual(newData.Name, group.Name);
+                    break;
                 }
                 
             }

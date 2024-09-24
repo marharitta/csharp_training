@@ -80,13 +80,13 @@ namespace Addressbook_web_tests
             group.Footer = "";
             group.Header = "";
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
+            List<GroupData> oldGroups = GroupData.GetAll();
 
             app.Groups.Create(group);
 
-            Assert.AreEqual(oldGroups.Count, app.Groups.GetGroupCount());
+            Assert.AreEqual(oldGroups.Count,GroupData.GetAll().Count);
 
-            List<GroupData> newGroups = app.Groups.GetGroupList();
+            List<GroupData> newGroups = GroupData.GetAll();;
             oldGroups.Add(group);
             oldGroups.Sort();
             newGroups.Sort();

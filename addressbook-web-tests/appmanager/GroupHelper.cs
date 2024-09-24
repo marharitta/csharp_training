@@ -24,10 +24,10 @@ namespace Addressbook_web_tests
             ReturnToGroupPage();
             return this;
         }
-        public GroupHelper Modify(int v, GroupData newData)
+        public GroupHelper Modify(string id, GroupData newData)
         {
             manager.Navigator.GoToGroupsPage();
-            SelectGroup(v);
+            SelectGroup(id);
             InitGroupModification();
             FillGroupForm(newData);
             SubmitGroupModification();
@@ -35,15 +35,6 @@ namespace Addressbook_web_tests
             return this;
         }
 
-        public GroupHelper Remove(int v)
-        {
-            manager.Navigator.GoToGroupsPage();
-
-            SelectGroup(v);
-            SubmitDeleteGroup();
-            manager.Navigator.GoToGroupsPage();
-            return this;
-        }
         public GroupHelper Remove(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
@@ -75,24 +66,9 @@ namespace Addressbook_web_tests
             return this;
         }
 
-               public GroupHelper InitGroupCreation()
+        public GroupHelper InitGroupCreation()
         {
             driver.FindElement(By.Name("new")).Click();
-            return this;
-        }
-
-        public GroupHelper SelectGroup(int p)
-        {
-  //          driver.FindElement(By.LinkText("groups")).Click();
-            if(p == 0)
-            {
-                driver.FindElement(By.XPath($"//div[@id='content']/form/span/input")).Click();
-            }
-            else
-            {
-                driver.FindElement(By.XPath($"//div[@id='content']/form/span[{p+1}]/input")).Click();
-            }
-
             return this;
         }
 

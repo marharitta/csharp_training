@@ -11,7 +11,6 @@ namespace Addressbook_web_tests
         public void DeleteGroupTest()
         {
             app.Navigator.GoToGroupsPage();
-
             if (app.Groups.IsElementPresent(By.XPath($"//input[@name='selected[]']")) == false)
             {
                 GroupData group = new GroupData("aaa");
@@ -25,17 +24,16 @@ namespace Addressbook_web_tests
             GroupData toBeRemoved = oldGroups[0];
 
             app.Groups.Remove(toBeRemoved);
-
-            Assert.AreEqual(oldGroups.Count - 1, app.Groups.GetGroupCount());
-
             List<GroupData> newGroups = GroupData.GetAll();
+
+            Assert.That(newGroups.Count, Is.EqualTo(oldGroups.Count - 1));
             
             oldGroups.RemoveAt(0);
-            Assert.AreEqual(oldGroups,newGroups);
+            Assert.That(newGroups, Is.EqualTo(oldGroups));
 
             foreach (GroupData group in newGroups)
             {
-                Assert.AreNotEqual(group.Id, toBeRemoved.Id);
+                Assert.That(toBeRemoved.Id, Is.Not.EqualTo(group.Id));
             }
 
 

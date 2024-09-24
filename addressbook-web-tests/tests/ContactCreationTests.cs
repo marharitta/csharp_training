@@ -1,5 +1,4 @@
-﻿using System.Security.Cryptography;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Addressbook_web_tests
 {
@@ -27,26 +26,20 @@ namespace Addressbook_web_tests
         }
         public static IEnumerable<ContactData> ContactDataFromJsonFile()
         {
-
             return JsonConvert.DeserializeObject<List<ContactData>>(
                 File.ReadAllText(@"contacts.json"));
-
         }
-        
 
         [Test, TestCaseSource("ContactDataFromJsonFile")]//nameof(RandomContactDataProvider)
         public void TheContactCreationTestCaseTest(ContactData contact)
         {
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
             app.Contacts.Create(contact);
+            List<ContactData> newContact = ContactData.GetAll();
 
-            Assert.AreEqual(oldContacts.Count + 1, app.Contacts.GetContactCount());
-
-            List<ContactData> newContact = app.Contacts.GetContactList();
-            Assert.AreEqual(oldContacts.Count + 1, newContact.Count);
-
+            Assert.That(newContact.Count, Is.EqualTo(oldContacts.Count + 1));
         }
     }
 }

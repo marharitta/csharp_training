@@ -31,10 +31,10 @@ namespace Addressbook_web_tests
         }
 
 
-        public ContactHelper Remove(int v)
+        public ContactHelper Remove(string id)
         {
             ReturnToHomePage();
-            SelectContact(v);
+            SelectContact(id);
             SubmitDeleteContact();
             ReturnToHomePage();
             return this;
@@ -90,27 +90,6 @@ namespace Addressbook_web_tests
         {
             driver.FindElement(By.XPath($"//*[@id=\"content\"]/form[2]/div[2]/input")).Click();
             contactCache = null;
-            return this;
-        }
-
-        public ContactHelper SelectContact(int v)
-        {
-            
-            
-            if (IsElementPresent(By.XPath($"//*[@id='maintable']/tbody/tr[2]")) == true)
-            {
-                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[{v+2}]/td/input")).Click();
-            }
-            else
-            {
-                ContactData contact = new ContactData();
-                contact.FirstName = "Petr";
-                contact.LastName = "Petrov";
-                Create(contact);
-                ReturnToHomePage();
-
-                driver.FindElement(By.XPath($"//table[@id='maintable']/tbody/tr[2]/td[1]/input")).Click();
-            }
             return this;
         }
 
