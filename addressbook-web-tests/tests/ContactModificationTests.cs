@@ -25,18 +25,19 @@ namespace Addressbook_web_tests
 
                 app.Contacts.Create(contact);
             }
-            
-            app.Contacts.Modify(0, newContact);
 
             List<ContactData> oldContacts = ContactData.GetAll();
-            ContactData oldData = oldContacts[0];
+            int modifyIndex = new Random().Next(oldContacts.Count);
+            ContactData oldData = oldContacts[modifyIndex];
+
+            app.Contacts.Modify(oldData.Id, newContact);
 
             List<ContactData> newContacts = ContactData.GetAll();
 
             Assert.AreEqual(oldContacts.Count, newContacts.Count);
 
-            oldContacts[0].FirstName = newContact.FirstName;
-            oldContacts[0].LastName = newContact.LastName;
+            oldContacts[modifyIndex].FirstName = newContact.FirstName;
+            oldContacts[modifyIndex].LastName = newContact.LastName;
             oldContacts.Sort();
             newContacts.Sort();
             Assert.AreEqual(oldContacts, newContacts);

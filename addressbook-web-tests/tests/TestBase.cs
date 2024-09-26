@@ -29,5 +29,20 @@ namespace Addressbook_web_tests
 
             return builder.ToString();
         }
+
+        public static string GenerateEngNumRandomString(int max)
+        {
+            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789 ";
+            var random = new Random();
+
+            var stringChars = new char[random.Next(max/2, max)];
+
+            for (int i = 0; i < stringChars.Length; i++)
+            {
+                stringChars[i] = chars[random.Next(chars.Length)];
+            }
+
+            return new string(stringChars);
+        }
     }
 }

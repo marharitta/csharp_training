@@ -16,14 +16,14 @@ namespace Addressbook_web_tests
             ReturnToHomePage();
             AddNewContact();
             FillContactForm(contact);
-            SubmiteContactCreation();
+            SubmitContactCreation();
             ReturnToHomePage();
             return this;
         }
-        public ContactHelper Modify(int v, ContactData newData)
+        public ContactHelper Modify(string id, ContactData newData)
         {
             ReturnToHomePage();
-            InitContactModification(v);
+            InitContactModificationById(id);
             FillContactForm(newData);
             SubmitContactModification();
             ReturnToHomePage();
@@ -56,7 +56,14 @@ namespace Addressbook_web_tests
             driver.FindElement(By.XPath($"//*[@id='maintable']/tbody/tr[{v+2}]/td[8]/a/img")).Click();
             return this;
         }
-        public ContactHelper SubmiteContactCreation()
+
+        public ContactHelper InitContactModificationById(string id)
+        {
+            driver.FindElement(By.XPath($"//a[@href='edit.php?id={id}']")).Click();
+            return this;
+        }
+
+        public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("//div[@id='content']/form/input[20]")).Click();
             contactCache = null;
@@ -138,7 +145,7 @@ namespace Addressbook_web_tests
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.OpenHomePage();
-            InitContactModification(0);
+            InitContactModification(index);
             string firstName = driver.FindElement(By.Name("firstname")).GetAttribute("value").Trim();
             string middleName = driver.FindElement(By.Name("middlename")).GetAttribute("value").Trim();
             string lastName = driver.FindElement(By.Name("lastname")).GetAttribute("value").Trim();
