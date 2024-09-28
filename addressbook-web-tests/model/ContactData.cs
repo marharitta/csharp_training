@@ -184,6 +184,14 @@ namespace Addressbook_web_tests
                 return (from c in db.Contacts.Where(x => x.Deprecated == null || x.Deprecated == "0000-00-00 00:00:00") select c).ToList();
             }
         }
+        
+        public static ContactData GetOneByIndex(int index)
+        {
+            using (AddressBookDB db = new AddressBookDB())
+            {
+                return (from g in db.Contacts orderby g.Id ascending select g).Skip(index).Take(1).FirstOrDefault();
+            }
+        }
     }
 
 }
