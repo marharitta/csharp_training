@@ -5,6 +5,7 @@
         [Test]
         public void TestAddingContactToGroup()
         {
+
             GroupData group = GroupData.GetOneByIndex(0);
             if (group == null)
             {
@@ -20,10 +21,7 @@
 
             List<ContactData> oldList = group.GetContacts();
             ContactData contactToAdd = null;
-            if (oldList.Count > 0)
-            {
-                contactToAdd = ContactData.GetAll().FirstOrDefault(x => !oldList.Any(y => y.Id == x.Id));
-            }
+            contactToAdd = ContactData.GetAll().FirstOrDefault(x => !oldList.Any(y => y.Id == x.Id));
 
             if (contactToAdd == null)
             {
