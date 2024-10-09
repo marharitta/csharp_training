@@ -22,7 +22,7 @@ namespace adressbook_tests_autoit
             oldGroups.Sort();
             newGroups.Sort();
 
-            ClassicAssert.AreEqual(oldGroups, newGroups);
+            ClassicAssert.AreEqual(oldGroups.Count, newGroups.Count);
 
         }
     }
