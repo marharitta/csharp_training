@@ -24,10 +24,11 @@ namespace mantis
                 ProjectViewState = ViewState.Private
             };
 
-            app.Project.Create(account, project);
+            app.Project.LogInMantis(account);
+            app.Project.Create(project);
 
 
-            //    Assert.AreEqual();
+     //           Assert.AreEqual();
 
         }
     }
