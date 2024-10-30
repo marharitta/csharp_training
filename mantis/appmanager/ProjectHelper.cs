@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,7 +22,6 @@ namespace mantis
 
         public void Create(ProjectData project)
         {
-
             GoToProjectsPage();
             CreateProjectPage();
             FillCreationForm(project);
@@ -35,9 +35,7 @@ namespace mantis
 
         public void GoToProjectsPage()
         {
-            driver.FindElement(By.LinkText("Manage")).Click();
-            driver.FindElement(By.LinkText("Manage Projects")).Click();
-
+            driver.Url = "http://localhost:8080/mantisbt/manage_proj_page.php";
         }
 
         public void FillCreationForm(ProjectData project)
@@ -51,25 +49,44 @@ namespace mantis
 
         public void SubmitAddProject()
         {
-            driver.FindElement(By.XPath("//input[@value=\"Add Project\"]")).Click();  ///html/body/div/div[4]/div[3]/form/fieldset/span/input
+            driver.FindElement(By.XPath("//input[@value=\"Add Project\"]")).Click();  
         }
 
-        public void DeleteProject(int v)
+        public void DeleteProject(int index)
         {
             GoToProjectsPage();
-            SelectProject(v);
-            DelProject();
+            SelectProject(index);
+            DeleteButtonClick();
         }
 
-        public void DelProject()
+        public void DeleteButtonClick()
         {
             driver.FindElement(By.XPath("//input[@value=\"Delete Project\"]")).Click();
             driver.FindElement(By.XPath("//input[@value=\"Delete Project\"]")).Click();
         }
 
-        public void SelectProject(int id)
+        public void SelectProject(int index)
         {
-            driver.Url = "http://localhost:8080/mantisbt/manage_proj_edit_page.php?project_id=" + id;
+            driver.FindElement(By.XPath("//*[@id=\"content\"]/div[2]/table/tbody/tr[" + index + "]/td/a")).Click();
+        }
+
+        public List<ProjectData> GetProjList()
+        {
+            List<ProjectData> projectList = new List<ProjectData>();
+            GoToProjectsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"content\"]/div[2]/table/tbody/tr"));
+            foreach (IWebElement element in elements)
+            {
+                projectList.Add(new ProjectData() {
+                    ProjectName = element.FindElement(By.XPath("td[1]/a")).Text,
+                    ProjectStatus = (Status)Enum.Parse(typeof(Status), element.FindElement(By.XPath("td[2]")).Text),
+                    // ENABLED missed
+                    //ProjectViewState = (ViewState)Enum.Parse(typeof(ViewState), element.FindElement(By.XPath("td[4]")).Text),
+                    ProjectDescription = element.FindElement(By.XPath("td[5]")).Text,
+                });
+            }
+
+            return projectList;
         }
     }
 }

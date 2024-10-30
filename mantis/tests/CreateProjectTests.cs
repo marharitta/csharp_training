@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
 using NUnit.Framework;
 
 
@@ -8,27 +10,29 @@ namespace mantis
     {
         [Test]
         public void TestProjectCreation()
-        { 
+        {
             AccountData account = new AccountData()
             {
                 Name = "administrator",
                 Password = "newPass",
-                
-            };
-            ProjectData project = new ProjectData()
-            {
-                ProjectName = StringHelper.GenerateEngNumRandomString(15),
-                ProjectInheritGlobal = new Random(1).Next() == 1,
-                ProjectDescription = StringHelper.GenerateRandomString(100),
-                ProjectStatus = Status.release,
-                ProjectViewState = ViewState.Private
+
             };
 
             app.Project.LogInMantis(account);
+
+
+            ProjectData project = new ProjectData();
+            project.GenerateRandom();
+
+            List<ProjectData> oldProjects = app.Project.GetProjList();
             app.Project.Create(project);
 
+            List<ProjectData> newProjects = app.Project.GetProjList();
+            oldProjects.Add(project);
+            oldProjects.Sort();
+            newProjects.Sort();
 
-     //           Assert.AreEqual();
+            Assert.AreEqual(oldProjects, newProjects);
 
         }
     }

@@ -20,7 +20,26 @@ namespace mantis
             };
 
             app.Project.LogInMantis(account);
-            app.Project.DeleteProject(2);//придумать как вычислить айдишник
+
+            List<ProjectData> oldProjects = app.Project.GetProjList();
+            if(oldProjects.Count == 0)
+            {
+                ProjectData project = new ProjectData();
+                project.GenerateRandom();
+
+                app.Project.Create(project);
+                oldProjects = app.Project.GetProjList();
+            }
+
+            int deleteProjectIndex = 1;
+            app.Project.DeleteProject(deleteProjectIndex);
+
+            List<ProjectData> newProjects = app.Project.GetProjList();
+            oldProjects.RemoveAt(deleteProjectIndex -1 );
+            oldProjects.Sort();
+            newProjects.Sort();
+
+            Assert.AreEqual(oldProjects, newProjects);
         }
 
     }
