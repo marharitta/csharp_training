@@ -4,12 +4,12 @@ using System.Security.Cryptography;
 using NUnit.Framework;
 
 
-namespace mantis
+namespace MantisTest
 {
     public class CreateProjectTests :TestBase
     {
         [Test]
-        public void TestProjectCreation()
+        public async Task TestProjectCreation()
         {
             AccountData account = new AccountData()
             {
@@ -21,13 +21,15 @@ namespace mantis
             app.Project.LogInMantis(account);
 
 
-            ProjectData project = new ProjectData();
+            ProjectModel project = new ProjectModel();
             project.GenerateRandom();
 
-            List<ProjectData> oldProjects = app.Project.GetProjList();
+ //           List<ProjectModel> oldProjects = app.Project.GetProjList();
+            List<ProjectModel> oldProjects = await app.API.GetProjectsListAsync(account);
             app.Project.Create(project);
 
-            List<ProjectData> newProjects = app.Project.GetProjList();
+//            List<ProjectModel> newProjects = app.Project.GetProjList();
+            List<ProjectModel> newProjects = await app.API.GetProjectsListAsync(account);
             oldProjects.Add(project);
             oldProjects.Sort();
             newProjects.Sort();

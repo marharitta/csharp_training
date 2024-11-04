@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Internal;
 
-namespace mantis
+namespace MantisTest
 {
     public class AdminHelper : HelperBase
     {

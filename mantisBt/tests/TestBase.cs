@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 //using System.Text;
 
-namespace mantis
+namespace MantisTest
 {
     public  class TestBase
     {

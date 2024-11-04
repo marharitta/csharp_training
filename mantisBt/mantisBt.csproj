@@ -5,8 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
-    <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>    
+	<IsTestProject>true</IsTestProject>
+	<RunSettingsFilePath>$(MSBuildProjectDirectory)\nunit.runsettings</RunSettingsFilePath>
   </PropertyGroup>
 
   <ItemGroup>

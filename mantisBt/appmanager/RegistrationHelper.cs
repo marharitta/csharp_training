@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
 
-namespace mantis
+namespace MantisTest
 {
     public class RegistrationHelper :HelperBase
     {
@@ -38,9 +38,7 @@ namespace mantis
         public void OpenMainPage()
         {
     
-            IWebElement link = driver.FindElement(By.Id("logout-link"));
-
-            if (link.Enabled == true)
+            if (driver.FindElements(By.Id("logout-link")).Count > 0)
             {
                 driver.FindElement(By.Id("logout-link")).Click();
             }

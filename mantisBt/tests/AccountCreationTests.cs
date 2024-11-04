@@ -4,7 +4,7 @@ using System.IO;
 //using System.Text;
 using NUnit.Framework;
 
-namespace mantis
+namespace MantisTest
 
 {
 
@@ -34,6 +34,7 @@ namespace mantis
                 Email = "testuser5@localhost.localdomain"
             };
             List<AccountData> accounts = app.Admin.GetAllAccounts();
+
             AccountData existingAccount = accounts.Find(x => x.Name == account.Name);
 
             if (existingAccount != null)

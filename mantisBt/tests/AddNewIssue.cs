@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using mantis;
 
-namespace mantis
+namespace MantisTest
 {
     [TestFixture]
     public class AddNewIssueTests: TestBase
     {
         [Test]
-        public void AddNewIssue()
+        public async Task AddNewIssue()
         {
             AccountData account = new AccountData()
             {
                 Name = "administrator",
                 Password = "newPass"
             };
-            ProjectData project = new ProjectData()
+            ProjectModel project = new ProjectModel()
             {
                 Id = "4"
             };
@@ -29,7 +28,7 @@ namespace mantis
                 Category = "test"
             };
 
-            var output = app.API.CreateNewIssueAsync(account,project, issue);
+            var output = await app.API.CreateNewIssueAsync(account,project, issue);
             Console.WriteLine(output);
         }
     }

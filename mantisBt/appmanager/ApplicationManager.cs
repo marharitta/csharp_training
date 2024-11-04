@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using mantis;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 
-namespace mantis
+namespace MantisTest
 {
     public class ApplicationManager
     {

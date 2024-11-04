@@ -4,12 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using Mantis;
 
-namespace mantis
+namespace MantisTest
 {
-    public class ProjectData : IEquatable<ProjectData>, IComparable<ProjectData>
+    public class ProjectModel : IEquatable<ProjectModel>, IComparable<ProjectModel>
     {
-        public ProjectData() { }
+        public ProjectModel() { }
+        public ProjectModel(ProjectData data)
+        {
+            ProjectName = data.name;
+            ProjectInheritGlobal = data.inherit_global;
+            ProjectDescription = data.description;
+            //ProjectStatus = data.status;
+            //ProjectViewState = data.view_state;
+        }
+
         public string Id { get; set; }
         public string ProjectName { get; set; }
 
@@ -20,7 +30,7 @@ namespace mantis
         public ViewState ProjectViewState { get; set; }
         public string ProjectDescription { get; set; }
 
-        public bool Equals(ProjectData other)
+        public bool Equals(ProjectModel other)
         {
             if (Object.ReferenceEquals(this, null))
             {
@@ -34,7 +44,7 @@ namespace mantis
             return ProjectName == other.ProjectName;
         }
 
-        public int CompareTo(ProjectData other)
+        public int CompareTo(ProjectModel other)
         {
             if (Object.ReferenceEquals(other, null))
             {

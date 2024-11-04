@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace mantis
+namespace MantisTest
 {
     public class LoginHelper : HelperBase
     {

@@ -5,12 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using NUnit.Framework;
 
-namespace mantis
+namespace MantisTest
 {
     public class DeleteProjectTests : TestBase
     {
         [Test]
-        public void TestProjectDelete()
+        public async Task TestProjectDelete()
         {
             AccountData account = new AccountData()
             {
@@ -21,20 +21,21 @@ namespace mantis
 
             app.Project.LogInMantis(account);
 
-            List<ProjectData> oldProjects = app.Project.GetProjList();
+            List<ProjectModel> oldProjects = app.Project.GetProjList();
             if(oldProjects.Count == 0)
             {
-                ProjectData project = new ProjectData();
+                ProjectModel project = new ProjectModel();
                 project.GenerateRandom();
 
-                app.Project.Create(project);
-                oldProjects = app.Project.GetProjList();
+//                app.Project.Create(project);
+                await app.API.CreateProjectAsync(account, project);
+                oldProjects = await app.API.GetProjectsListAsync(account);
             }
 
             int deleteProjectIndex = 1;
             app.Project.DeleteProject(deleteProjectIndex);
 
-            List<ProjectData> newProjects = app.Project.GetProjList();
+            List<ProjectModel> newProjects = await app.API.GetProjectsListAsync(account);
             oldProjects.RemoveAt(deleteProjectIndex -1 );
             oldProjects.Sort();
             newProjects.Sort();

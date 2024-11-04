@@ -8,7 +8,7 @@ using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
-namespace mantis
+namespace MantisTest
 {
     public class ProjectHelper : HelperBase
     {
@@ -20,7 +20,7 @@ namespace mantis
             manager.Auth.LogIn(account);
         }
 
-        public void Create(ProjectData project)
+        public void Create(ProjectModel project)
         {
             GoToProjectsPage();
             CreateProjectPage();
@@ -38,7 +38,7 @@ namespace mantis
             driver.Url = "http://localhost:8080/mantisbt/manage_proj_page.php";
         }
 
-        public void FillCreationForm(ProjectData project)
+        public void FillCreationForm(ProjectModel project)
         {
             Type(By.Id("project-name"), project.ProjectName);
             Select(By.Id("project-status"), ((int)project.ProjectStatus).ToString());
@@ -70,14 +70,14 @@ namespace mantis
             driver.FindElement(By.XPath("//*[@id=\"content\"]/div[2]/table/tbody/tr[" + index + "]/td/a")).Click();
         }
 
-        public List<ProjectData> GetProjList()
+        public List<ProjectModel> GetProjList()
         {
-            List<ProjectData> projectList = new List<ProjectData>();
+            List<ProjectModel> projectList = new List<ProjectModel>();
             GoToProjectsPage();
             ICollection<IWebElement> elements = driver.FindElements(By.XPath("//*[@id=\"content\"]/div[2]/table/tbody/tr"));
             foreach (IWebElement element in elements)
             {
-                projectList.Add(new ProjectData() {
+                projectList.Add(new ProjectModel() {
                     ProjectName = element.FindElement(By.XPath("td[1]/a")).Text,
                     ProjectStatus = (Status)Enum.Parse(typeof(Status), element.FindElement(By.XPath("td[2]")).Text, true),
                     // ENABLED missed
@@ -88,5 +88,7 @@ namespace mantis
 
             return projectList;
         }
+
+
     }
 }
